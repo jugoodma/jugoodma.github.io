@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Welcome to Justin Goodman's personal website!">
+		<meta name="keywords" content="Justin,Goodman,UMD,coding">
+		<meta name="author" content="Justin Goodman">
+		<meta charset="utf-8">
+
+		<link type="image/x-icon" rel="shortcut icon" href="favicon.ico"/>
+		<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+		
+		<title>Justin Goodman</title>
+
+		<style>
+			body {
+				/*font-family: 'Raleway', sans-serif;*/
+				/*font-family: 'IBM Plex Mono', monospace;*/
+				font-family: 'Space Mono', monospace;
+				margin-left: 4ch;
+				margin-right: 4ch;
+			}
+
+			#randomPhrase {
+				display: block;
+			}
+
+			.button {
+				background-color: #e7e7e7;
+				color: black;
+				border-radius: 4px;
+				font-family: 'Space Mono', monospace;
+				padding: 0 2ch 0 2ch;
+			}
+
+			.inline > li {
+				display: inline;
+				padding-right: 10px;
+			}
+
+			@media only screen and (min-width: 850px) {
+				/* desktop */
+				body {
+					width: 80ch;
+				}
+
+				#randomPhrase {
+					display: inline;
+				}
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header>
+			<h1>Justin Goodman <span id="randomPhrase"></span></h1>
+		</header>
+		<hr>
+		<section>
+			<h2>Links:</h2>
+			<ul class="inline">
+				<li><a href="https://github.com/jugoodma" target="_blank">GitHub</a></li>
+				<li><a href="https://www.linkedin.com/in/justin-goodman" target="_blank">LinkedIn</a></li>
+				<li><a href="resume-curr.pdf" target="_blank">Resume</a></li>
+			</ul>
+		</section>
+		<hr>
+		<section>
+			<h2>About:</h2>
+			
+			<p itemprop="description">I'm Justin, current undergraduate honors student at University of Maryland, College Park, double majoring in Computer Science and Mathematics. My wide range of interests and abilities center around a common theme: creative expression. From web/app development to film editing to music composition, I am passionate about expressing my creativity through media that others may enjoy. When I'm not at my computer or studying, you can find me cycling with the UMD Cycling Team, playing racquetball with my friends, or tutoring classmates in Computer Science.</p>
+			<p>Interested in collaborating on a project? Email me at <a itemprop="url" href="mailto:jugoodma@umd.edu">jugoodma@umd.edu</a>. Interested in getting to know me first? You can find me on LinkedIn and GitHub. Cheers!</p>
+		</section>
+		<hr>
+		<section>
+			<h2>Projects:</h2>
+			
+			<h4>Corners</h4>
+			<p>A simple board game my friend and I created. Check out the project <a href="https://github.com/cbakalia/corners">here</a>.</p>
+
+			<h4>REU-2018</h4>
+			<p>University of Rochester data science Research Experience for Undergraduates. My partner and I created novel Amazon Mechanical Turk interfaces to build three datasets for training computer vision models. See the data manipulation and interface code we wrote <a href="https://github.com/jugoodma/reu-2018">here</a>.</p>
+
+			<h4>Ti-84 Programs</h4>
+			<p>My old Ti-84 calculator programs. I imported the binaries from my calculator, and wrote a python program to translate them to readable TI-BASIC code. Check out the project <a href="https://github.com/jugoodma/ti-84-programs">here</a>.</p>
+
+			<h4>Behavioral Economics Android App</h4>
+			<p>This application communicates with FitBit web API and Google Firebase to store and use participants' sleep and activity data. The researchers using this app want to determine if they can use incentives to cause people to sleep more. Check out the project <a href="https://github.com/jugoodma/econ-app">here</a>.</p>
+			
+			<h4>Home Linux Server</h4>
+			<p>I built a Ubuntu server at home over one of my winter breaks. I built it out of an old HP computer. It became unreliable (the computer was probably over 10 years old), so recently I migrated everything to a Raspberry Pi. My future plans are to push the server to cloud-hosting services. I'm currently hosting my brother's blog <a href="https://ironprofessor.com" target="_blank">IronProfessor</a> and my own <a href="https://gravy.ml" target="_blank">gogs git server</a>.</p>
+			
+			<h4>DataLeague 2016</h4>
+			<p>This was created in 24 hours for an open data hackathon in which we were tasked to find a use for a list of open data sources. See the project <a href="dl2016">here</a>.</p>
+		</section>
+		<hr>
+		<section>
+			<h2>Fun Stuff:</h2>
+			<form>
+				<label>Poll: </label>
+				<label for="opt1-input" id="opt1">Option 1</label>
+				<input type="radio" name="poll" id="opt1-input">
+				|
+				<label for="opt2-input" id="opt2">Option 2</label>
+				<input type="radio" name="poll" id="opt2-input">
+				<button class="button" onclick="poller(this.parentNode); return false;">See how you compare</button>
+			</form>
+			<span id="results"></span>
+			<p id="disclaimer" style="font-size: 0.5em; text-indent: 8ch;"></p>
+			<p>Music production: <a href="https://www.soundcloud.com/justingoodman" target="_blank">Here's my SoundCloud account</a>.</p>
+			<p>Video editing: <a href="https://www.youtube.com/watch?v=al-dvTkA97M" target="_blank">Here's a 10-minute documentary I edited for my high school history group</a>.</p>
+			<div>"<span id="quote"></span>" - <span id="author" style="font-style: italic;"></span></div>
+		</section>
+		<hr>
+		<footer>
+			<h3>Contact:</h3>
+			<p>E-Mail 📧 <a itemprop="url" href="mailto:jugoodma@umd.edu">jugoodma@umd.edu</a></p>
+			<p>Tel 📞 <a itemprop="url" href="tel:4439447875">443.944.7875</a></p>
+		</footer>
+
+		<script>
+			// <3 open source <3
+			function rand(len) {
+				// returns random number between 0 and len (always positive)
+				return Math.floor(Math.random() * len)
+			}
+			// JS random top phrase
+			var phrases = [
+				"certified cool dude 😎",
+				"9.91/10 excellent 🆒",
+				"wears cool bowties 👔",
+				"not a robot... 🤖",
+				"tabs or spaces? 🤔",
+				"emojis are AWESOME 💯",
+				"80 characters! 8️⃣0️⃣"
+			];
+			document.getElementById("randomPhrase").innerHTML = "- " + phrases[rand(phrases.length)];
+			// JS (random) polling, heh
+			var pollOptions = [
+				["tabs", "spaces"],
+				["spaces", "tabs"],
+				["dark mode", "light mode"],
+				["light mode", "dark mode"]
+			];
+			var choice = pollOptions[rand(pollOptions.length)];
+			document.getElementById("opt1").innerHTML = choice[0];
+			document.getElementById("opt1-input").setAttribute("value", choice[0]);
+			document.getElementById("opt2").innerHTML = choice[1];
+			document.getElementById("opt2-input").setAttribute("value", choice[1]);
+			function poller(form) {
+				form.style.display = "none"; // remove the button, sneaky
+
+				// I could optimize this,,,,,
+				var percentage_low = rand(101); // 0 - 100
+				if (percentage_low > 50) {
+					percentage_low = 100 - percentage_low;
+				}
+				var percentage_high = 100 - percentage_low;
+				var screwTheUser = rand(10);
+				if (screwTheUser > 7) {
+					var temp = percentage_low;
+					percentage_low = percentage_high;
+					percentage_high = temp;
+					document.getElementById("results").setAttribute("style", "background-color: #F08080;");
+					percentage_high = "Oh no, " + percentage_high;
+				}
+				var checked = form.elements["poll"][0];
+				var notChecked = form.elements["poll"][1];
+				if (!checked.checked) {
+					var temp = notChecked;
+					notChecked = checked;
+					checked = temp;
+				}
+				document.getElementById("results").innerHTML = percentage_high + "% said " + checked.value + ", whereas " + percentage_low + "% said " + notChecked.value + " *";
+				document.getElementById("disclaimer").innerHTML = "*This is not a valid study";
+				return false;
+			}
+			// favorite quotes
+			var quotes = [
+				["An investment in knowledge pays the best interest", "Benjamin Franklin"],
+				["There is no substitute for hard work", "Thomas A. Edison"]
+			];
+			choice = quotes[rand(quotes.length)];
+			document.getElementById("quote").innerHTML = choice[0];
+			document.getElementById("author").innerHTML = choice[1];
+		</script>
+	</body>
+</html>
