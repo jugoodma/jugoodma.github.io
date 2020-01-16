@@ -175,34 +175,37 @@ bump to 3-7 3min
 
 			var wd = document.getElementById("workout-deck");
 
-			var and = true; // false == or
+			var and = false; // false == or
 			var rad = document.andorForm.andOrRadio;
 			for (var i = rad.length - 1; i >= 0; i--) {
 				rad[i].addEventListener("change", function() {
 					if (this.checked) {
 						and = this.value === "and";
+						search();
 					}
 				});
 			}
-			rad[0].checked = true;
+			rad[1].checked = true;
 
 			// search method
 			function search() {
 				for (var i = wd.children.length - 1; i >= 0; i--) {
 					// get tags
-					var t = wd.children[i].lastElementChild.innerText.split(", ");
 					var res = and;
-					for (var j = t.length - 1; j >= 0; j--) {
-						if (and) {
-							res = selected[t[j]] && res; // todo : fix
-							if (!res) break;
-						} else  {
+					var t = wd.children[i].lastElementChild.innerText.split(", ");
+					if (and) {
+						for (var j = keysTags.length - 1; res && j >= 0; j--) {
+							if (selected[keysTags[j]]) {
+								res = t.includes(keysTags[j]) && res;
+							}
+						}
+					} else {
+						for (var j = t.length - 1; !res && j >= 0; j--) {
 							res = selected[t[j]] || res;
-							if (res) break;
 						}
 					}
 					if (res) {
-						wd.children[i].style.display = "inline-block"; // should be "flex" in mobile, but whatever
+						wd.children[i].style.display = "inline-block"; // should be "flex" in mobile, i think, but whatever
 					} else {
 						wd.children[i].style.display = "none";
 					}
