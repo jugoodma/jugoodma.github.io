@@ -238,6 +238,14 @@ bump to 3-7 3min
 				code.innerText = obj["workout"];
 				pre.appendChild(code);
 				cb.appendChild(pre);
+				if (typeof obj["link"] !== "undefined") {
+					var a = document.createElement("a");
+					a.href = obj["link"];
+					a.target = "_blank";
+					a.classList.add("card-link");
+					a.innerText = obj["link"];
+					cb.appendChild(a);
+				}
 				c.appendChild(cb);
 				// card footer
 				var cf = document.createElement("div");
