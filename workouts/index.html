@@ -227,7 +227,11 @@ bump to 3-7 3min
 				// card header
 				var ch = document.createElement("div");
 				ch.classList.add("card-header");
-				ch.innerText = "Workout #";
+				if (typeof obj["title"] !== "undefined") {
+					ch.innerText = obj["title"];
+				} else {
+					ch.innerText = "Workout #";
+				}
 				c.appendChild(ch);
 				// card body
 				var cb = document.createElement("div");
