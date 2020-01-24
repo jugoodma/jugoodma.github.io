@@ -44,6 +44,12 @@ var data =
 		"tags": ["bike", "hiit", "indoor"]
 	},
 	{
+		"title": "40-min torque monster",
+		"workout": ">=40min (STAY SEATED)\n15min wu, 2-?x 12:30 interval blocks\n\ntime rpm pe ftp%\n\nwarm up:\n2:30  80  1\n2:00  85  3\n1:30  90  5\n0:30 100  6  90%\n1:00  80  2\n1:00 100  8 110%\n1:00  80  2\n1:30  60  7 100%\n1:30  80  2\n0:30  90  9\n2:00  80  1\n\nblock:\n0:20 max 10\n0:40  60  1\n2:00  80  2\n0:30  60  8 120%\n1:30  80  2\n0:30  60  8 120%\n1:30  80  2\n0:30  60  8 120%\n1:30  80  2\n0:30  60  8 120%\n3:00  80  1",
+		"link": "https://youtu.be/ComQQ41XIDk",
+		"tags": ["bike", "indoor", "aerobic"]
+	},
+	{
 		"title": "Drill, Swim, Sprint - Butterfly Variant",
 		"workout": "1x500 warm up\n5x100 free descend\n4x75 50 drill 25 swim\n4x50 kick\n---\n8x50 fly drill\n8x50 fly swim\n4x50 fly sprint\n---\n3x100 fly kick\n---\n4x{75 IM, 25 fly kick} drop least favorite stroke\n---\n1x300 warm down",
 		"link": "https://www.swimworkouts.net/workouts/112",
