@@ -7,7 +7,7 @@
 		<meta name="author" content="Justin Goodman">
 		<meta charset="utf-8">
 
-		<link type="image/x-icon" rel="shortcut icon" href="favicon.ico"/>
+		<link type="image/x-icon" rel="shortcut icon" href="favicon.png"/>
 		<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 		
 		<title>Justin Goodman</title>
@@ -68,28 +68,35 @@
 		<section>
 			<h2>About:</h2>
 			
-			<p itemprop="description">I'm Justin, current undergraduate honors student at University of Maryland, College Park, double majoring in Computer Science and Mathematics. My wide range of interests and abilities center around a common theme: creative expression. From web/app development to film editing to music composition, I am passionate about expressing my creativity through media that others may enjoy. When I'm not at my computer or studying, you can find me cycling with the UMD Cycling Team, playing racquetball with my friends, or tutoring classmates in Computer Science.</p>
+			<p itemprop="description">
+				I'm Justin, current Computer Science Master's student at University of Maryland, College Park.
+				My wide range of interests and abilities center around a common theme: creative expression.
+				From web/app development to film editing to music composition, I am passionate about expressing my creativity through media that others may enjoy.
+				When I'm not at my computer or studying, you can find me swimming, biking, running, playing racquetball with my friends, or tutoring classmates in Computer Science.
+			</p>
 			<p>Interested in collaborating on a project? Email me at <a itemprop="url" href="mailto:jugoodma@umd.edu">jugoodma@umd.edu</a>. Interested in getting to know me first? You can find me on LinkedIn and GitHub. Cheers!</p>
 		</section>
 		<hr>
 		<section>
 			<h2>Projects:</h2>
+
+			<h4>GPSRace</h4>
+			<p>COVID-19 canceled our favorite sport season, so I helped my brother build out a site to host and compare GPS race files. Check it out <a href="https://gpsrace.cc" target="_blank">here</a>.</p>
 			
 			<h4>Corners</h4>
-			<p>A simple board game my friend and I created. Check out the project <a href="https://github.com/cbakalia/corners">here</a>.</p>
+			<p>A simple board game my friend and I created. Check out the project <a href="https://github.com/cbakalia/corners" target="_blank">here</a>.</p>
 
 			<h4>REU-2018</h4>
-			<p>University of Rochester data science Research Experience for Undergraduates. My partner and I created novel Amazon Mechanical Turk interfaces to build three datasets for training computer vision models. See the data manipulation and interface code we wrote <a href="https://github.com/jugoodma/reu-2018">here</a>.</p>
+			<p>University of Rochester data science Research Experience for Undergraduates. My partner and I created novel Amazon Mechanical Turk interfaces to build three datasets for training computer vision models. See the data manipulation and interface code we wrote <a href="https://github.com/jugoodma/reu-2018" target="_blank">here</a>.</p>
 
 			<h4>Ti-84 Programs</h4>
-			<p>My old Ti-84 calculator programs. I imported the binaries from my calculator, and wrote a python program to translate them to readable TI-BASIC code. Check out the project <a href="https://github.com/jugoodma/ti-84-programs">here</a>.</p>
+			<p>My old Ti-84 calculator programs. I imported the binaries from my calculator, and wrote a python program to translate them to readable TI-BASIC code. Check out the project <a href="https://github.com/jugoodma/ti-84-programs" target="_blank">here</a>.</p>
 
 			<h4>Behavioral Economics Android App</h4>
-			<p>This application communicates with FitBit web API and Google Firebase to store and use participants' sleep and activity data. The researchers using this app want to determine if they can use incentives to cause people to sleep more. Check out the project <a href="https://github.com/jugoodma/econ-app">here</a>.</p>
+			<p>This application communicates with FitBit web API and Google Firebase to store and use participants' sleep and activity data. The researchers using this app want to determine if they can use incentives to cause people to sleep more. Check out the project <a href="https://github.com/jugoodma/econ-app" target="_blank">here</a>.</p>
 			
 			<h4>Home Linux Server</h4>
 			<p>I built a Ubuntu server at home over one of my winter breaks. I built it out of an old HP computer. It became unreliable (the computer was probably over 10 years old), so recently I migrated everything to a Raspberry Pi. My future plans are to push the server to cloud-hosting services. I'm currently hosting my brother's blog <a href="https://ironprofessor.com" target="_blank">IronProfessor</a>.</p>
-			<!--  and my own <a href="https://gravy.ml" target="_blank">gogs git server</a> -->
 			
 			<h4>DataLeague 2016</h4>
 			<p>This was created in 24 hours for an open data hackathon in which we were tasked to find a use for a list of open data sources. See the project <a href="dl2016">here</a>.</p>
@@ -97,6 +104,7 @@
 		<hr>
 		<section>
 			<h2>Fun Stuff:</h2>
+			<p><a href="thesis.pdf" target="_blank">I wrote a thesis</a>! You should check it out if you're interested in Twitter advertising. You should also check out the paper I helped publish, of which my thesis extends -- <a href="https://www.usenix.org/conference/usenixsecurity20/presentation/wei" target="_blank"><em>What Twitter Knows: Characterizing Ad Targeting Practices, User Perceptions, and Ad Explanations Through Users' Own Twitter Data</em></a>.</p>
 			<p>I like exercise, so I made an interface to view all of my favorite workouts <a href="workouts">here</a>. Current status: need to add more workouts, and a button to select a random workout.</p>
 			<p>I also like to cook, so I made a (similar) interface to view all of my favorite recipes <a href="recipes">here</a>. Current status: I have some recipes I want to remember, but have not made an interface yet.</p>
 			<form>
@@ -181,7 +189,9 @@
 			// favorite quotes
 			var quotes = [
 				["An investment in knowledge pays the best interest", "Benjamin Franklin"],
-				["There is no substitute for hard work", "Thomas A. Edison"]
+				["There is no substitute for hard work", "Thomas A. Edison"],
+				["Just do it. Don't let your dreams be dreams.", "Shia LaBeouf"],
+				["Ain't about how fast I get there. Ain't about what's waiting on the other side. It's the climb.", "Miley Cyrus"]
 			];
 			choice = quotes[rand(quotes.length)];
 			document.getElementById("quote").innerHTML = choice[0];
