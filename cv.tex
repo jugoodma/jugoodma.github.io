@@ -38,7 +38,7 @@
 \newcommand{\entry}[5]{
 	% title, loc, loc, date, content
 	\noindent
-	\begin{tabular}{p{2in} p{\dimexpr \linewidth-2\tabcolsep-3in}} % the second col isn't perfect
+	\begin{tabular}{p{2in} p{\dimexpr \linewidth-2\tabcolsep-2.25in}} % the second col isn't perfect
 		\noindent \textbf{#1}
 		
 		\ifx #2  \else \noindent \textit{#2} \fi
@@ -114,21 +114,22 @@
 	\sect{Education}
 	
 	\entry{University of Maryland}{College Park, MD}{}{August 2016 -- May 2020}{
-	B.S.\ Computer Science (Department Honors)
-	
-	B.S.\ Mathematics
-	
-	Honors College -- \textit{University Honors Program}
-	
-	GPA: 3.945
-	
-	Magna Cum Laude
-	
-	Selected coursework:
-	
+		B.S.\ Computer Science (Department Honors)
+		
+		B.S.\ Mathematics
+		
+		Honors College -- \textit{University Honors Program}
+		
+		GPA: 3.945
+		
+		Magna Cum Laude
+		
+		Selected coursework:
+		
+		\vspace{-5mm}
 		\begin{multicols}{2}
 			{\scriptsize
-				\begin{itemize}[label=, itemsep=0pt, wide]
+				\begin{itemize}[label=, itemsep=-2pt, wide]
 					\item Advanced Algorithms
 					\item Artificial Intelligence
 					\item Advanced Data Structures
@@ -148,19 +149,44 @@
 			}
 		\end{multicols}
 		
+		\vspace{-5mm}
+		\hfill
 		{\footnotesize * Graduate-level course}
+		\hfill \mbox{}
 	}
 	
 	\entry{University of Maryland}{College Park, MD}{}{August 2020 -- May 2021}{
-		(expected) M.S.\ Computer Science
+		(\textit{expected}) M.S.\ Computer Science
+		
+		GPA: 4.0
+		
+		Coursework:
+		
+		\vspace{-3mm}
+%		\begin{multicols}{2}
+			{\scriptsize
+				\begin{itemize}[label=, itemsep=-2pt, wide]
+					\item Empirical Research Methods
+					\item Decision-Making for Robotics
+					\item Wireless and Mobile Systems for the IoT
+				\end{itemize}
+			}
+%		\end{multicols}
 	}
 	
 	\sect{Teaching}
 	
-	\entry{CMSC389B}{University of Maryland}{}{Fall 2020}{
+	\vspace*{-0.5cm}
+	\begin{center}
+		{\small \textit{Evaluations available upon request}}
+	\end{center}
+	
+	\entry{CMSC389B}{University of Maryland}{}{Fall 2020 -- Spring 2021}{
 		\textsc{A Tour of Programming Languages}
 		
 		STIC (Student Initiated Course) Co-Facilitator
+		
+		\url{https://github.com/plstic}
 	}
 	
 	\entry{CMSC434}{University of Maryland}{}{Spring 2020}{
@@ -175,10 +201,10 @@
 		STIC (Student Initiated Course) Co-Facilitator
 	}
 	
-	\entry{CMSC250}{University of Maryland}{}{Five Semesters}{
+	\entry{CMSC250}{University of Maryland}{}{Six Semesters}{
 		\textsc{Discrete Structures}
 		
-		Head/Teaching TA (Spring 2019, Fall 2019, Fall 2020)
+		Head/Teaching TA (Spring 2019, Fall 2019, Fall 2020, Spring 2021)
 		
 		Teaching TA (Spring 2018, Fall 2018)
 	}
@@ -281,44 +307,31 @@
 		\end{itemize}
 	}
 	
-	\sect{Projects}
-
+	\sect{School Projects}
+	
 	\vspace*{-0.5cm}
 	\begin{center}
 		{\small \textit{Projects available on GitHub or upon request}}
 	\end{center}
 	
-	\entry{Behavioral Research App}{University of California}{San Diego, CA}{August 2017}{
-		Developed Android app for Behavioral Economics researchers at UCSD
+	\entry{Graduate Class Projects}{University of Maryland}{}{}{
+		Advanced projects including:
+		%		\begin{multicols}{2}
+		\begin{itemize}[nosep, wide]
+			\item User study (recreation) in smartphone-sharing tendencies
+			\item IoT sonic localization
+			\item Budget-constrained robot mapping
+		\end{itemize}
+		%		\end{multicols}
 		
-		Used Android Studio, along with Google Firebase Authentication/Database, and FitBit API to log participants' sleep time
+		\href{https://github.com/jugoodma/can-borrow}{jugoodma/can-borrow},
+		\href{https://github.com/jugoodma/818bw-project}{jugoodma/818bw-project}
 	}
 	
-	\entry{Personal Home Linux Server}{}{Salisbury, MD}{June 2017}{
-		(still maintained) Converted an old computer into a UNIX-based web server (Ubuntu Server, NGINX, PHP, MariaDB)
-		
-		Currently hosting: \href{https://ironprofessor.com}{ironprofessor.com}
-		
-		Set up SSH key-based authentication and forced-HTTPS protocol
-		
-		Migrated server to Raspberry Pi
-		
-		Hooked up UPS -- server sends text-message updates
-	}
-	
-	\entry{DataLeague Hackathon}{University of Maryland}{College Park, MD}{November 2016}{
-		Placed 2\textsuperscript{nd} overall
-		
-		Collaborators: Clifford Bakalian, James Gu
-		
-		Designed a model for estimating the likelihood that an airborne illness will survive and affect a population
-		
-		Integrated APIs from Weather Underground, Air Now AQI, Google Maps, and the US Census Bureau
-	}
-	
-	\entry{Class Projects}{University of Maryland}{}{}{
+	\entry{Undergrad Class Projects}{University of Maryland}{}{}{
 		Wide array of projects including/involving:
 		
+		\vspace{-1em}
 		\begin{multicols}{2}
 			\begin{itemize}[nosep, wide]
 				\item Principles of OOP (Java)
@@ -339,6 +352,54 @@
 		\end{multicols}
 	}
 	
+	\pagebreak
+	\sect{Personal Projects}
+
+	\vspace*{-0.5cm}
+	\begin{center}
+		{\small \textit{Projects available on GitHub or upon request}}
+	\end{center}
+	
+	\entry{GPSRace}{}{}{Summer 2020}{
+		Developed initial front-end and back-end for cloud-based GPS comparison tool.
+		This was created during the COVID-19 pandemic as a means for cyclists to ``race'' solo, yet still compare times.
+		\href{https://gpsrace.cc}{gpsrace.cc}
+	}
+	
+	\entry{Behavioral Research App}{University of California}{San Diego, CA}{August 2017}{
+		\begin{itemize}[itemsep=0pt, nosep, wide]
+			\item Developed Android app for Behavioral Economics researchers at UCSD
+		
+			\item Used Android Studio, along with Google Firebase Authentication/Database, and FitBit API to log participants' sleep time
+		\end{itemize}
+	}
+	
+	\entry{Personal Home Linux Server}{}{Salisbury, MD}{June 2017}{
+		(still maintained) Converted an old computer into a UNIX-based web server (Ubuntu Server, NGINX, PHP, MariaDB)
+		
+		\begin{itemize}[itemsep=0pt, nosep, wide]
+			\item Currently hosting: \href{https://ironprofessor.com}{ironprofessor.com}, \href{https://justgood.dev}{justgood.dev}
+		
+			\item Set up SSH key-based authentication and forced-HTTPS protocol
+		
+			\item Migrated server to Raspberry Pi (3B+)
+		
+			\item Hooked up UPS (Uninterruptible Power Supply) -- server sends text-message updates
+		\end{itemize}
+	}
+	
+	\entry{DataLeague Hackathon}{University of Maryland}{College Park, MD}{November 2016}{
+		Placed 2\textsuperscript{nd} overall
+		
+		Collaborators: Clifford Bakalian, James Gu
+		\begin{itemize}[itemsep=0pt, nosep, wide]
+			\item Designed a model for estimating the likelihood that an airborne illness will survive and affect a population
+		
+			\item Integrated APIs from Weather Underground, Air Now AQI, Google Maps, and the US Census Bureau
+		\end{itemize}
+	}
+	
+	\pagebreak
 	\sect{Organizations}
 	
 	\entry{Dept.\ of Computer Science Education Committee}{University of Maryland}{College Park, MD}{Fall 2018 -- Spring 2020}{
@@ -359,5 +420,13 @@
 	
 	\entry{Eagle Scout}{}{Salisbury, MD}{August 2015}{
 		Project: cleared out overgrowth in 350ft \(\times\) 10ft creek (mill race) at Furnace Town Living Heritage Museum. I try and check back each summer -- the overgrowth is still gone!
+	}
+	
+	\sect{Things I Like}
+	
+	\entry{Normal Human Things}{}{}{}{
+		writing (especially in \LaTeX), making music, learning, cooking, cycling, swimming, running, advocating for wearing sunscreen, working on difficult problems, studying math until my brain hurts, cracking dumb jokes with my friends, and playing video games
+		
+		I like coding too!
 	}
 \end{document}
