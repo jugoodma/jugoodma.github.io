@@ -1,3 +1,7 @@
-# jugoodma.github.io
+# website
 
-[link!](https://jugoodma.github.io)
+<https://justgood.dev>
+
+<https://jugoodma.github.io>
+
+<https://terpconnect.umd.edu/~jugoodma>

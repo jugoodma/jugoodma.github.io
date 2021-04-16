@@ -1,0 +1,310 @@
+% Resume - Justin Goodman %
+
+%%% = SECTION
+% = SUB-SECTION
+
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[urw-garamond]{mathdesign}
+%\usepackage{courier}
+\usepackage[margin=1.25cm]{geometry}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{xhfill}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	citecolor=green,
+}
+\usepackage{nopageno}
+\usepackage{fontawesome}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}- } % tab with dash
+\newcommand\ctab[1][1cm]{\hspace*{#1}} % Continue tab
+
+\setlength{\voffset}{0.2in}
+\setlength{\headsep}{5pt}
+\setlist{leftmargin=2cm}
+
+\newcommand{\sect}[1]{
+	% \vspace{-0.5cm}\noindent\rule{\linewidth}{0.5pt}
+	\begin{center}
+		\noindent\xrfill[0.7ex]{0.5pt} \mbox{ } {\Large \bf #1} \mbox{ } \xrfill[0.7ex]{0.5pt}
+	\end{center}
+}
+
+\newcommand{\entry}[5]{
+	{\small
+	% title, loc, loc, date, content
+	\noindent
+	\begin{tabular}{p{2in} p{\dimexpr \linewidth-2\tabcolsep-2.25in}} % the second col isn't perfect
+		\ifx #1  \else \noindent \textbf{#1} \fi
+		
+		\ifx #2  \else \noindent \textit{#2} \fi
+		
+		\ifx #3  \else \noindent \textit{#3} \fi
+		
+		\ifx #4  \else \noindent #4 \fi
+		&
+		#5
+	\end{tabular}
+	}
+	\vspace{1mm}
+}
+
+\begin{document}
+%\thispagestyle{empty}
+%\begin{center}
+%{\LARGE Justin Goodman}
+%\begin{minipage}[t]{\linewidth}
+%	\begin{multicols}{3}
+%		\begin{center}
+%			\hfill \\
+%			\hfill \\
+%			6901 Preinkert Dr., 6604A \\
+%			College Park, MD 20740
+%		\end{center}
+%		\newpage
+%		\begin{center}
+%			\hfill \\
+%			jugoodma@umd.edu \\
+%			443.944.7875 \\
+%			\begin{tabular}{rl}
+%				\raisebox{-.25\height}{\includegraphics[scale=0.05]{github}} & \href{https://github.com/jugoodma}{@jugoodma} \\
+%			\end{tabular}
+%		\end{center}
+%		\newpage
+%		\begin{center}
+%		\includegraphics[scale=0.15]{website-qr.jpg} \\
+%		{\footnotesize \href{https://terpconnect.umd.edu/~jugoodma}{terpconnect.umd.edu/$\sim$jugoodma}}
+%		\end{center}
+%	\end{multicols}
+%\end{minipage}
+%\end{center}
+%\vspace{-0.5cm}\noindent\rule{\linewidth}{1pt}\vspace{0.25cm}
+%{\Large \bf Education}
+%
+%{\bf University of Maryland, College Park}
+%
+%- B.S.\ Computer Science, B.S.\ Mathematics \hfill August 2016 -- May 2020
+%
+%{\small University Honors program in the Honors College; CS Dept.\ Honors; Overall GPA: 3.969}
+%
+%{\small Selected coursework:} {\footnotesize Distributed Systems (grad), Algorithms, Data Structures, AI, HCI, Game Programming}
+%
+%- M.S.\ Computer Science (\textit{expected}) \hfill August 2020 -- May 2021
+%
+%\noindent\rule{\linewidth}{0.5pt}\vspace{0.25cm}
+%{\Large \bf Experience}
+%
+%{\bf Computer Vision REU}, University of Rochester, {\em Rochester, NY} \hfill May -- July 2018
+%
+%{\small
+%	\tab Title: `Computational Methods for Music, Media, and Minds'
+%	
+%	\tab Created novel Amazon Mechanical Turk interfaces to build three datasets for training computer vision models
+%	
+%	\tab Earned Deans' Citation for Broadening Research Involvement
+%}
+%
+%{\bf DataLeague Hackathon}, (2\textsuperscript{nd} place), University of Maryland, {\em College Park, MD} \hfill November 2016
+%
+%{\small
+%	\tab Designed a model for estimating the likelihood that an airborne illness will survive and
+%	
+%	\ctab affect a population
+%	
+%	\tab Integrated APIs from Weather Underground, Air Now AQI, Google Maps, and more
+%}
+%
+%{\bf Web Development Internship}, D3Corp, {\em Ocean City, MD} \hfill Summer 2016 \& 2017
+%
+%{\small
+%	\tab Collaborated with team to design webpages for commercial enterprises and increase visibility
+%	
+%	\ctab through search engine optimization
+%	
+%	\tab Contributed to over 100 websites
+%	
+%	\tab Learned how to use WordPress and content management systems for building websites
+%	
+%	\tab Learned advanced techniques for WordPress, Jekyll/Liquid, Linux server implementation/
+%	
+%	\ctab maintenance, Google Analytics/Tags, and Facebook Pixel
+%}
+%
+%\noindent\rule{\linewidth}{0.5pt}\vspace{0.25cm}
+%{\Large \bf Projects} \hfill {\small \textit{All projects available on GitHub. School projects available on request}} \hfill \mbox{}
+%
+%{\bf App Development for Behavioral Research} \hfill August 2017 -- Present
+%
+%{\small
+%	\tab Developing Android app for group of Behavioral Economics researchers at UC San Diego, {\em San Diego, CA}
+%	
+%	\tab Used Android Studio, along with Google Firebase Authentication/
+%	
+%	\ctab Database, and FitBit API to log participants' sleep time
+%}
+%
+%{\bf Personal Home UNIX Server} \hfill June 2017 -- Present
+%
+%{\small
+%	\tab Converted an old computer into a UNIX-based web server (Ubuntu Server, NGINX, PHP,
+%	
+%	\ctab MariaDB) currently hosting: ironprofessor.com
+%	
+%	\tab Set up SSH key-based authentication and forced-HTTPS protocol
+%}
+%
+%{\bf Class Projects} \hfill August 2016 -- Present
+%
+%{\small
+%	\ctab Wide array of projects including
+%	
+%	\tab Principles of OOP, C Projects, Lexing/Parsing, AI, User Interfaces, AVL Trees and other data structures,
+%	
+%	\ctab Distributed Storage Systems
+%}
+%
+%
+%\noindent\rule{\linewidth}{0.5pt}\vspace{0.25cm}
+%{\Large \bf Things I Like}
+%
+%\textbf{Programming} \hfill {\small Java, Python, C, OCaml, Ruby}
+%
+%\textbf{Leadership} \hfill {\small Dept.\ of Computer Science Education Committee (Fall 2018 -- Spring 2020)}
+%
+%\hspace*{\fill}{\small 5 Semesters TA (OOP I / Discrete Math); Best Undergraduate TA (Spring 2018)}
+%
+%\hspace*{\fill}{\small UMD Cycling Club Marketing Coordinator (June -- Dec. 2017), Eagle Scout (Aug. 2015)}
+%
+%\pagebreak
+
+
+
+
+\thispagestyle{empty}
+\begin{center}
+	{\LARGE Justin Goodman}
+\end{center}
+\begin{center}
+	\begin{multicols}{3}
+		\faMapMarker \hspace{0.25cm} College Park, MD
+		
+		\columnbreak
+		
+		\faGithub \hspace{0.25cm} \href{https://github.com/jugoodma}{@jugoodma}
+		
+		\columnbreak
+		
+		\faCode \hspace{0.25cm} \href{https://justgood.dev}{justgood.dev}
+	\end{multicols}
+\end{center}
+
+\sect{Education}
+
+\entry{University of Maryland}{College Park, MD}{}{August 2016 -- May 2020}{
+	B.S.\ Computer Science (Department Honors)
+	
+	B.S.\ Mathematics
+	
+	Honors College -- \textit{University Honors Program}
+	
+	GPA: 3.945 -- Magna Cum Laude
+	
+	{\small Selected coursework:} {\footnotesize Distributed Systems (grad), Algorithms, Data Structures, AI, HCI, Game Programming, Compilers, Advanced Calculus I, Abstract Algebra}
+}
+
+\entry{}{}{}{August 2020 -- May 2021}{
+	M.S.\ Computer Science (\textit{expected})
+	
+	GPA: 4.0
+}
+
+\sect{Experience}
+
+\entry{Software Developer, Graduate}{Raytheon BBN Technologies}{Arlington, VA}{Summer 2020}{
+	Collaborated with team to enhance micro-service system registry
+	
+	Learned advanced SOA (service-oriented architecture) design, Docker, Kubernetes, Agile software development, and Node.js (React, Meteor)
+}
+
+\entry{Big Data REU}{}{}{Summer 2019}{
+	Title: `BigDataX: From theory to practice in Big Data computing at eXtreme scales'
+	
+	Worked on addressing space theory in HExSA lab
+	
+	Created novel process dynamics visualization techniques
+}
+
+\entry{Computer Vision REU}{}{}{Summer 2018}{
+	Title: `Computational Methods for Music, Media, and Minds' (Dr.\ Chenliang Xu)
+	
+	Created novel Amazon Mechanical Turk interfaces to build three datasets for training computer vision models
+	
+	Earned Deans' Citation for Broadening Research Involvement
+}
+
+\entry{Web Development Internship}{D3Corp}{Ocean City, MD}{Summer 2016 \& 2017}{
+	Collaborated with team to design webpages for commercial enterprises and increase visibility through search engine optimization
+	
+	Contributed to over 100 websites
+	
+	Learned how to use WordPress and content management systems for building websites
+	
+	Learned advanced techniques for WordPress, Jekyll/Liquid, Linux server implementation/maintenance, Google Analytics/Tags, and Facebook Pixel
+}
+
+\sect{Projects}
+\vspace{-5mm}
+\begin{center}
+	{\small \textit{All personal projects available on GitHub. School projects available on request}}
+\end{center}
+
+\entry{Android App}{}{}{August -- December 2017}{
+	Developed Android app for group of Behavioral Economics researchers at University of California, San Diego
+	
+	Used Android Studio, along with Google Firebase Authentication/Database, and FitBit API to log participants' sleep time
+}
+
+\entry{Personal Home Linux Server}{}{Salisbury, MD}{June 2017 -- present}{
+	(still maintained) Converted an old computer into a UNIX-based web server -- recently migrated to Raspberry Pi
+	
+	Set up SSH key-based authentication, forced-HTTPS protocol, text-message updates, UPS power backup, and a git repository
+		
+	Currently hosting: \href{https://ironprofessor.com}{ironprofessor.com}, \href{https://justgood.dev}{justgood.dev}
+}
+
+%\entry{Class Projects}{}{College Park, MD}{August 2016 -- Spring 2021}{
+%	Principles of OOP, C system fundamentals, Lexing/Parsing, AI heuristics and searching, User Interfaces, AVL Trees and other data structures, Distributed storage systems
+%}
+
+\sect{Things I Like}
+
+\entry{Programming}{}{}{}{
+	Python, Golang, Java, C, OCaml, Ruby
+}
+
+\entry{Leadership}{}{}{}{
+	Dept.\ of Computer Science Education Committee (Fall 2018 -- Spring 2020)
+	
+	UMD Cycling Club Marketing Coordinator (June -- Dec. 2017), Eagle Scout (Aug. 2015)
+}
+
+\entry{Teaching}{}{}{}{
+	8 Semesters TA (OOP I / Discrete Math / HCI); Best Undergraduate TA (Spring 2018); Co-developed and taught 2 STICs
+}
+
+\entry{Normal Human Things}{}{}{}{
+	writing (especially in \LaTeX), making music, learning, cooking, cycling, swimming, running, advocating for wearing sunscreen, working on difficult problems, studying math until my brain hurts, cracking dumb jokes with my friends, and playing video games
+}
+
+\end{document}
