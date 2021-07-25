@@ -12,15 +12,8 @@
 		
 		<title>Justin Goodman</title>
 
+		<link href="/css/main.css" rel="stylesheet">
 		<style>
-			body {
-				/*font-family: 'Raleway', sans-serif;*/
-				/*font-family: 'IBM Plex Mono', monospace;*/
-				font-family: 'Space Mono', monospace;
-				margin-left: 4ch;
-				margin-right: 4ch;
-			}
-
 			#randomPhrase {
 				display: block;
 			}
@@ -40,10 +33,6 @@
 
 			@media only screen and (min-width: 850px) {
 				/* desktop */
-				body {
-					width: 80ch;
-				}
-
 				#randomPhrase {
 					display: inline;
 				}
@@ -149,7 +138,7 @@
 				</ul>
 			</p>
 			<p>
-				<a href="docs/thesis.pdf" target="_blank">I wrote a thesis</a> during undergrad!
+				<a href="docs/thesis.pdf" target="_blank">I wrote a thesis</a> [<a href="http://honors.cs.umd.edu/students/finished" target="_blank">UMD archive</a>] during undergrad!
 				You should check it out if you're interested in Twitter advertising.
 				You should also check out the paper I helped publish, of which my thesis extends -- <a href="https://www.usenix.org/conference/usenixsecurity20/presentation/wei" target="_blank"><em>What Twitter Knows: Characterizing Ad Targeting Practices, User Perceptions, and Ad Explanations Through Users' Own Twitter Data</em></a>.
 			</p>
@@ -171,6 +160,7 @@
 			</form>
 			<span id="results"></span>
 			<p id="disclaimer" style="font-size: 0.5em; text-indent: 8ch;"></p>
+			<p>Live streaming: <a href="https://www.twitch.tv/tacotruck1000" target="_blank">Sometimes I stream on Twitch</a>.</p>
 			<p>Music production: <a href="https://www.soundcloud.com/justingoodman" target="_blank">Here's my SoundCloud account</a>.</p>
 			<p>Video editing: <a href="https://www.youtube.com/watch?v=al-dvTkA97M" target="_blank">Here's a 10-minute documentary I edited for my high school history group</a>.</p>
 			<div>"<span id="quote"></span>" - <span id="author" style="font-style: italic;"></span></div>
@@ -192,21 +182,28 @@
 			var phrases = [
 				"certified cool dude 😎",
 				"9.91/10 excellent 🆒",
-				"wears cool bowties 👔",
+				"wears cool bowties 😂",
 				"not a robot... 🤖",
 				"tabs or spaces? 🤔",
 				"emojis are AWESOME 💯",
-				"80 characters! 8️⃣0️⃣"
+				"80 characters! 8️⃣0️⃣",
+				"funny guy!! 👔",
+				"👽🎞🎀🧀🌜🌛👻👁"
 			];
 			document.getElementById("randomPhrase").innerHTML = "- " + phrases[rand(phrases.length)];
 			// JS (random) polling, heh
 			var pollOptions = [
-				["tabs", "spaces"],
 				["spaces", "tabs"],
 				["dark mode", "light mode"],
-				["light mode", "dark mode"]
+				["emacs", "vim"],
+				["vscode", "atom"]
 			];
 			var choice = pollOptions[rand(pollOptions.length)];
+			if (rand(1)) {
+				var b = choice[0];
+				choice[0] = choice[1];
+				choice[1] = b;
+			}
 			document.getElementById("opt1").innerHTML = choice[0];
 			document.getElementById("opt1-input").setAttribute("value", choice[0]);
 			document.getElementById("opt2").innerHTML = choice[1];

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Justin's blog">
+        <meta name="keywords" content="Justin,Goodman,UMD,coding">
+        <meta name="author" content="Justin Goodman">
+        <meta charset="utf-8">
+        <link type="image/x-icon" rel="shortcut icon" href="/favicon.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+        <title>Blog | Justin Goodman</title>
+        <link href="/css/main.css" rel="stylesheet">
+        <style>
+            .list-inline > li {
+                display: inline-block;
+                padding: 0.5em 1em;
+                margin: 0.25em;
+                border: 2px solid black;
+                border-radius: 2px;
+            }
+            .active {
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Blog</h1>
+        <p>
+            Welcome.
+            I might start writing stuff here.
+        </p>
+        <p>
+            Back in 2012, before I knew how the internet worked, I created a blog.
+            I never posted anything, but it was cool to have.
+            If interested, it's <a href="https://talesofthewontonsoup.wordpress.com/" target="_blank">here</a>.
+            This blog, though, is completely different.
+        </p>
+        <p>
+            <!-- TODO -->
+            <strong>NOTICE:</strong>
+            Nothing here is finished yet!
+            Once I'm mostly done programming the backend (and only left with writing actual content), then I'll remove this notice.
+        </p>
+        <hr/>
+        <h3>Tags:</h3>
+{% TAG_LIST %}
+<!-- template -->
+<!--
+<ul class="list-inline">
+    <li></li>
+    <li></li>
+    ...
+</ul>
+-->
+        <form>
+            <label>Sort: </label>
+            <label for="opt1-input">Alphabetic</label>
+            <input type="radio" name="tag-sort" id="opt1-input" class="tag-sort-option">
+            |
+            <label for="opt2-input">Numeric</label>
+            <input type="radio" name="tag-sort" id="opt2-input" class="tag-sort-option">
+        </form>
+        <h3>Posts:</h3>
+{% LIST %}
+<!-- template -->
+<!--
+<ol id="posts" start="0" reversed>
+    <li></li>
+    <li></li>
+    ...
+</ol>
+-->
+        <script src="index.js"></script> <!-- for searching, etc -->
+    </body>
+</html>
