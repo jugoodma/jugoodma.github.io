@@ -1,6 +1,7 @@
 ---
 title: Moving to NYC
 date: 09/01/2021
+publish: no
 tags: new york
 ...
 
