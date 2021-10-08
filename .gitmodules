@@ -1,0 +1,3 @@
+[submodule "lantern/frontend-api"]
+	path = lantern/frontend-api
+	url = https://github.com/lantern-org/frontend-api.git

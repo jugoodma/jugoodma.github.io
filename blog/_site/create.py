@@ -81,6 +81,8 @@ for post in os.listdir(POSTS): # no guaranteed order
         # i hate python variables (the whole global scope thing)
         p = md.convert(f.read())
     #
+    if md.Meta.get("publish"):
+        continue
     # show metadata (todo, maybe make this collapsable?)
     p += "<hr>\n<pre><code class='txt'>METADATA\n--------\n"+"\n".join([x+": "+"|".join(md.Meta[x]) for x in md.Meta])+"\n</code></pre>"
     #
@@ -96,7 +98,7 @@ for post in os.listdir(POSTS): # no guaranteed order
         # we'll see if this works
         #
         # gotta figure out how to follow symlinks for html
-        # for now, just copy the image
+        # for now, just copy the image?
         #shutil.copy(os.path.join(IMAGES,image), os.path.join(slug_dir,image))
     #
     # save data
