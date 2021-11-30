@@ -7,6 +7,7 @@ static blog
 - `_site/` contains scripts and tools to generate the blog itself
 
 run (in this directory):
+
 ```
 python3 _site/create.py
 ```

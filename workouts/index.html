@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
-		<meta name="description" content="Workout search">
-		<meta name="keywords" content="">
-		<meta name="author" content="Justin Goodman">
-		
-		<!-- <link type="image/x-icon" rel="shortcut icon" href="favicon.png"/> -->
-		<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-		
-		<title>Workouts</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="description" content="Workout search" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Justin Goodman" />
 
-		<style>
-			body {
-				/* font-family: 'Raleway', sans-serif; */
-				/* font-family: 'IBM Plex Mono', monospace; */
-				font-family: 'Space Mono', monospace;
-				margin-left: 4ch;
-				margin-right: 4ch;
-			}
+    <!-- <link type="image/x-icon" rel="shortcut icon" href="favicon.png"/> -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Space+Mono"
+      rel="stylesheet"
+    />
 
-			.card {
-				max-width: max-content;
-				margin: 5px;
-			}
+    <title>Workouts</title>
 
-			@media only screen and (min-width: 850px) {
-				/* desktop */
-				body {
-					/* width: 80ch; */
-				}
-			}
-		</style>
-	</head>
-	
-	<body>
-		<header>
-			<h1 class="text-center">Workout Database</h1>
-		</header>
-		<hr>
-		<section>
-			<h2 class="text-center">Filters</h2>
-			
-			<!-- consider adding a filter for the tags? -->
-			<!-- example
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      body {
+        /* font-family: 'Raleway', sans-serif; */
+        /* font-family: 'IBM Plex Mono', monospace; */
+        font-family: "Space Mono", monospace;
+        margin-left: 4ch;
+        margin-right: 4ch;
+      }
+
+      .card {
+        max-width: max-content;
+        margin: 5px;
+      }
+
+      @media only screen and (min-width: 850px) {
+        /* desktop */
+        body {
+          /* width: 80ch; */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="text-center">Workout Database</h1>
+    </header>
+    <hr />
+    <section>
+      <h2 class="text-center">Filters</h2>
+
+      <!-- consider adding a filter for the tags? -->
+      <!-- example
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">@</span>
@@ -56,37 +67,49 @@
 			</div>
 			-->
 
-			<div class="card-columns m-a text-center" id="filter-deck">
-				<!-- generated -->
-				
-				<!-- example
+      <div class="card-columns m-a text-center" id="filter-deck">
+        <!-- generated -->
+
+        <!-- example
 				<div class="card text-white bg-primary">
 					<div class="card-body">
 						<h5 class="card-text">test</h5>
 					</div>
 				</div>
 				-->
-			</div>
+      </div>
 
-			<h4 class="text-center">And/Or?</h4>
+      <h4 class="text-center">And/Or?</h4>
 
-			<form class="m-a text-center" name="andorForm">
-				<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="and-radio" name="andOrRadio" class="custom-control-input" value="and">
-					<label class="custom-control-label" for="and-radio">AND search</label>
-				</div>
-				<div class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="or-radio" name="andOrRadio" class="custom-control-input" value="or">
-					<label class="custom-control-label" for="or-radio">OR search</label>
-				</div>
-			</form>
-		</section>
-		<hr>
-		<section>
-			<div class="card-columns" id="workout-deck">
-				<!-- generated -->
+      <form class="m-a text-center" name="andorForm">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            id="and-radio"
+            name="andOrRadio"
+            class="custom-control-input"
+            value="and"
+          />
+          <label class="custom-control-label" for="and-radio">AND search</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            id="or-radio"
+            name="andOrRadio"
+            class="custom-control-input"
+            value="or"
+          />
+          <label class="custom-control-label" for="or-radio">OR search</label>
+        </div>
+      </form>
+    </section>
+    <hr />
+    <section>
+      <div class="card-columns" id="workout-deck">
+        <!-- generated -->
 
-				<!-- example
+        <!-- example
 				<div class="card">
 					<div class="card-header">Workout 1</div>
 					<div class="card-body">
@@ -101,170 +124,182 @@ bump to 3-7 3min
 					<div class="card-footer text-muted">tag, tag, tag, tag</div>
 				</div>
 				-->
-			</div>
-		</section>
-		<hr>
-		<section>
-			<h2 class="text-center">New Workout?</h2>
-			<label>Workout</label>
-			<textarea></textarea>
-			<label>Tags</label>
-			<textarea></textarea>
-			<button>Submit</button>
-		</section>
-		<hr>
-		<footer>
-			<h3 class="text-center">Footer?</h3>
-			<p>Info?</p>
-		</footer>
+      </div>
+    </section>
+    <hr />
+    <section>
+      <h2 class="text-center">New Workout?</h2>
+      <label>Workout</label>
+      <textarea></textarea>
+      <label>Tags</label>
+      <textarea></textarea>
+      <button>Submit</button>
+    </section>
+    <hr />
+    <footer>
+      <h3 class="text-center">Footer?</h3>
+      <p>Info?</p>
+    </footer>
 
-		<script type="text/javascript" src="workouts.js"></script>
-		<script>
-			// https://stackoverflow.com/questions/44184794/what-is-the-javascript-equivalent-of-pythons-get-method-for-dictionaries
-			function get(object, key, default_value) {
-				var result = object[key];
-				return (typeof result !== "undefined") ? result : default_value;
-			}
+    <script type="text/javascript" src="workouts.js"></script>
+    <script>
+      // https://stackoverflow.com/questions/44184794/what-is-the-javascript-equivalent-of-pythons-get-method-for-dictionaries
+      function get(object, key, default_value) {
+        var result = object[key];
+        return typeof result !== "undefined" ? result : default_value;
+      }
 
-			// load tags
-			var tags = {};
-			for (var i = data.length - 1; i >= 0; i--) {
-				// data[i]
-				for (var j = data[i]["tags"].length - 1; j >= 0; j--) {
-					tags[data[i]["tags"][j]] = get(tags, data[i]["tags"][j], 0) + 1
-				}
-			}
+      // load tags
+      var tags = {};
+      for (var i = data.length - 1; i >= 0; i--) {
+        // data[i]
+        for (var j = data[i]["tags"].length - 1; j >= 0; j--) {
+          tags[data[i]["tags"][j]] = get(tags, data[i]["tags"][j], 0) + 1;
+        }
+      }
 
-			// build tags
-			var selected = {};
-			// console.log(tags);
-			function buildCard(text) {
-				var c = document.createElement("div");
-				c.classList.add("card", "text-white", "bg-primary");
-				var cb = document.createElement("div");
-				cb.classList.add("card-body");
-				var ct = document.createElement("h5");
-				ct.classList.add("card-text");
-				ct.innerText = text;
+      // build tags
+      var selected = {};
+      // console.log(tags);
+      function buildCard(text) {
+        var c = document.createElement("div");
+        c.classList.add("card", "text-white", "bg-primary");
+        var cb = document.createElement("div");
+        cb.classList.add("card-body");
+        var ct = document.createElement("h5");
+        ct.classList.add("card-text");
+        ct.innerText = text;
 
-				cb.appendChild(ct);
-				c.appendChild(cb);
+        cb.appendChild(ct);
+        c.appendChild(cb);
 
-				c.addEventListener("click", function(event) {
-					// console.log(text);
-					if (c.classList.contains("bg-primary")) {
-						// is selected, do un-select
-						c.classList.remove("bg-primary");
-						c.classList.add("bg-secondary");
+        c.addEventListener("click", function (event) {
+          // console.log(text);
+          if (c.classList.contains("bg-primary")) {
+            // is selected, do un-select
+            c.classList.remove("bg-primary");
+            c.classList.add("bg-secondary");
 
-						selected[text] = false;
-					} else {
-						// not selected, do select
-						c.classList.remove("bg-secondary");
-						c.classList.add("bg-primary");
+            selected[text] = false;
+          } else {
+            // not selected, do select
+            c.classList.remove("bg-secondary");
+            c.classList.add("bg-primary");
 
-						selected[text] = true;
-					}
+            selected[text] = true;
+          }
 
-					search();
-				});
+          search();
+        });
 
-				return c;
-			}
-			var keysTags = Object.keys(tags);
+        return c;
+      }
+      var keysTags = Object.keys(tags);
 
-			var wd = document.getElementById("workout-deck");
+      var wd = document.getElementById("workout-deck");
 
-			var and = false; // false == or
-			var rad = document.andorForm.andOrRadio;
-			for (var i = rad.length - 1; i >= 0; i--) {
-				rad[i].addEventListener("change", function() {
-					if (this.checked) {
-						and = this.value === "and";
-						search();
-					}
-				});
-			}
-			rad[1].checked = true;
+      var and = false; // false == or
+      var rad = document.andorForm.andOrRadio;
+      for (var i = rad.length - 1; i >= 0; i--) {
+        rad[i].addEventListener("change", function () {
+          if (this.checked) {
+            and = this.value === "and";
+            search();
+          }
+        });
+      }
+      rad[1].checked = true;
 
-			// search method
-			function search() {
-				for (var i = wd.children.length - 1; i >= 0; i--) {
-					// get tags
-					var res = and;
-					var t = wd.children[i].lastElementChild.innerText.split(", ");
-					if (and) {
-						for (var j = keysTags.length - 1; res && j >= 0; j--) {
-							if (selected[keysTags[j]]) {
-								res = t.includes(keysTags[j]) && res;
-							}
-						}
-					} else {
-						for (var j = t.length - 1; !res && j >= 0; j--) {
-							res = selected[t[j]] || res;
-						}
-					}
-					if (res) {
-						wd.children[i].style.display = "inline-block"; // should be "flex" in mobile, i think, but whatever
-					} else {
-						wd.children[i].style.display = "none";
-					}
-				}
-			}
-			
-			var fd = document.getElementById("filter-deck");
-			
-			for (var i = keysTags.length - 1; i >= 0; i--) {
-				fd.appendChild(buildCard(keysTags[i]));
-				// selected.unshift(keys[i]);
-				selected[keysTags[i]] = true;
-			}
+      // search method
+      function search() {
+        for (var i = wd.children.length - 1; i >= 0; i--) {
+          // get tags
+          var res = and;
+          var t = wd.children[i].lastElementChild.innerText.split(", ");
+          if (and) {
+            for (var j = keysTags.length - 1; res && j >= 0; j--) {
+              if (selected[keysTags[j]]) {
+                res = t.includes(keysTags[j]) && res;
+              }
+            }
+          } else {
+            for (var j = t.length - 1; !res && j >= 0; j--) {
+              res = selected[t[j]] || res;
+            }
+          }
+          if (res) {
+            wd.children[i].style.display = "inline-block"; // should be "flex" in mobile, i think, but whatever
+          } else {
+            wd.children[i].style.display = "none";
+          }
+        }
+      }
 
-			// build workout display
-			function buildWorkout(obj) {
-				var c = document.createElement("div");
-				c.classList.add("card");
-				// card header
-				var ch = document.createElement("div");
-				ch.classList.add("card-header");
-				if (typeof obj["title"] !== "undefined") {
-					ch.innerText = obj["title"];
-				} else {
-					ch.innerText = "Workout #";
-				}
-				c.appendChild(ch);
-				// card body
-				var cb = document.createElement("div");
-				cb.classList.add("card-body");
-				var pre = document.createElement("pre");
-				pre.classList.add("bg-secondary", "text-white", "p-2");
-				var code = document.createElement("code");
-				code.innerText = obj["workout"];
-				pre.appendChild(code);
-				cb.appendChild(pre);
-				if (typeof obj["link"] !== "undefined") {
-					var a = document.createElement("a");
-					a.href = obj["link"];
-					a.target = "_blank";
-					a.classList.add("card-link");
-					a.innerText = obj["link"];
-					cb.appendChild(a);
-				}
-				c.appendChild(cb);
-				// card footer
-				var cf = document.createElement("div");
-				cf.classList.add("card-footer", "text-muted");
-				cf.innerText = obj["tags"].join(", ");
-				c.appendChild(cf);
-				return c;
-			}
+      var fd = document.getElementById("filter-deck");
 
-			for (var i = data.length - 1; i >= 0; i--) {
-				wd.prepend(buildWorkout(data[i]));
-			}
-		</script>
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	</body>
+      for (var i = keysTags.length - 1; i >= 0; i--) {
+        fd.appendChild(buildCard(keysTags[i]));
+        // selected.unshift(keys[i]);
+        selected[keysTags[i]] = true;
+      }
+
+      // build workout display
+      function buildWorkout(obj) {
+        var c = document.createElement("div");
+        c.classList.add("card");
+        // card header
+        var ch = document.createElement("div");
+        ch.classList.add("card-header");
+        if (typeof obj["title"] !== "undefined") {
+          ch.innerText = obj["title"];
+        } else {
+          ch.innerText = "Workout #";
+        }
+        c.appendChild(ch);
+        // card body
+        var cb = document.createElement("div");
+        cb.classList.add("card-body");
+        var pre = document.createElement("pre");
+        pre.classList.add("bg-secondary", "text-white", "p-2");
+        var code = document.createElement("code");
+        code.innerText = obj["workout"];
+        pre.appendChild(code);
+        cb.appendChild(pre);
+        if (typeof obj["link"] !== "undefined") {
+          var a = document.createElement("a");
+          a.href = obj["link"];
+          a.target = "_blank";
+          a.classList.add("card-link");
+          a.innerText = obj["link"];
+          cb.appendChild(a);
+        }
+        c.appendChild(cb);
+        // card footer
+        var cf = document.createElement("div");
+        cf.classList.add("card-footer", "text-muted");
+        cf.innerText = obj["tags"].join(", ");
+        c.appendChild(cf);
+        return c;
+      }
+
+      for (var i = data.length - 1; i >= 0; i--) {
+        wd.prepend(buildWorkout(data[i]));
+      }
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
