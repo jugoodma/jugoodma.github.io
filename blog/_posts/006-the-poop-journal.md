@@ -7,17 +7,16 @@ tags: poop
 
 # So You Wanna Take Better Shits, Eh?
 
-
 intro
-
-
 
 ## Creating a poop journal
 
 best way to log?
+
 - prolly google sheets or something
 
 what to log?
+
 - notes
 - 10-point liekert scale of different qualities of the poop
 

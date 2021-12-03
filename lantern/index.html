@@ -1,85 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
-		<meta name="description" content="See where Justin is, if he's working out, right now!">
-		<meta name="keywords" content="">
-		<meta name="author" content="Justin Goodman">
-		
-		<!-- <link type="image/x-icon" rel="shortcut icon" href="favicon.png"/> -->
-		<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-		
-		<title>Lantern</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta
+      name="description"
+      content="See where Justin is, if he's working out, right now!"
+    />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Justin Goodman" />
 
-		<style>
-			body {
-				/* font-family: 'Raleway', sans-serif; */
-				/* font-family: 'IBM Plex Mono', monospace; */
-				font-family: 'Space Mono', monospace;
-				margin-left: 4ch;
-				margin-right: 4ch;
-			}
+    <!-- <link type="image/x-icon" rel="shortcut icon" href="favicon.png"/> -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Space+Mono"
+      rel="stylesheet"
+    />
 
-			.card {
-				max-width: max-content;
-				margin: 5px;
-			}
+    <title>Lantern</title>
 
-			@media only screen and (min-width: 850px) {
-				/* desktop */
-				/* body {
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      body {
+        /* font-family: 'Raleway', sans-serif; */
+        /* font-family: 'IBM Plex Mono', monospace; */
+        font-family: "Space Mono", monospace;
+        margin-left: 4ch;
+        margin-right: 4ch;
+      }
+
+      .card {
+        max-width: max-content;
+        margin: 5px;
+      }
+
+      @media only screen and (min-width: 850px) {
+        /* desktop */
+        /* body {
 					width: 80ch;
 				} */
-			}
-		</style>
-	</head>
-	
-	<body>
-		<header>
-			<h1 class="text-center">Lantern</h1>
-		</header>
-		<hr>
-		<section>
-			<h2 class="text-center">What is this?</h2>
-			<p>
-				Strava and Garmin (and probably other applications) provide services that let you stream your real-time location (as long as you take your phone with you) while you exercise.
-				I'm re-creating this service open-source.
-				Why?
-				Well, I thought these services were premium/paid/subscription-based.
-				Turns out, they're free.
-				So I have no excuse to make this.
-				We do it anyway!
-			</p>
-			<p>
-				If you're interested in self-hosting your own service like this, I'll have a full tutorial in the GitHub organization.
-				It's not easy to set up, so good luck!
-				(I'm kidding -- it's hard, but my documentation is good)
-			</p>
-			<p>
-				Without futher ado, here's the service live.
-                If you're viewing this site on a domain other than <code >justgood.dev</code> then you should put <code>justgood.dev/lantern</code> in the URL field below.
-			</p>
-		</section>
-		<hr>
+      }
+    </style>
+  </head>
 
-		<div id="Lantern">
-            If you see this, you might need to enable javascript...
-        </div>
-        <script src="frontend-api/api.js"></script>
+  <body>
+    <header>
+      <h1 class="text-center">Lantern</h1>
+    </header>
+    <hr />
+    <section>
+      <h2 class="text-center">What is this?</h2>
+      <p>
+        Strava and Garmin (and probably other applications) provide services
+        that let you stream your real-time location (as long as you take your
+        phone with you) while you exercise. I'm re-creating this service
+        open-source. Why? Well, I thought these services were
+        premium/paid/subscription-based. Turns out, they're free. So I have no
+        excuse to make this. We do it anyway!
+      </p>
+      <p>
+        If you're interested in self-hosting your own service like this, I'll
+        have a full tutorial in the GitHub organization. It's not easy to set
+        up, so good luck! (I'm kidding -- it's hard, but my documentation is
+        good)
+      </p>
+      <p>
+        Without futher ado, here's the service live. If you're viewing this site
+        on a domain other than <code>justgood.dev</code> then you should put
+        <code>justgood.dev/lantern</code> in the URL field below.
+      </p>
+    </section>
+    <hr />
 
-		<hr>
-		<footer>
-			<h3 class="text-center">Footer?</h3>
-			<p>Info?</p>
-		</footer>
+    <div id="Lantern">
+      If you see this, you might need to enable javascript...
+    </div>
+    <script src="frontend-api/api.js"></script>
 
-		
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	</body>
+    <hr />
+    <footer>
+      <h3 class="text-center">Footer?</h3>
+      <p>Info?</p>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

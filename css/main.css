@@ -1,19 +1,20 @@
 body {
-    /*font-family: 'Raleway', sans-serif;*/
-    /*font-family: 'IBM Plex Mono', monospace;*/
-    font-family: 'Space Mono', monospace;
-    margin-left: 4ch;
-    margin-right: 4ch;
+  /*font-family: 'Raleway', sans-serif;*/
+  /*font-family: 'IBM Plex Mono', monospace;*/
+  font-family: "Space Mono", monospace;
+  margin-left: 4ch;
+  margin-right: 4ch;
 }
 
-img, table {
-    width: 100%;
-    max-width: 100%;
+img,
+table {
+  width: 100%;
+  max-width: 100%;
 }
 
 @media only screen and (min-width: 850px) {
-    /* desktop */
-    body {
-        width: 80ch;
-    }
+  /* desktop */
+  body {
+    width: 80ch;
+  }
 }
