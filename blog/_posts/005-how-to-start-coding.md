@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Programming
-date: 12/01/2021
+date: 2021-12-01
 publish: no
 tags: coding
 ...

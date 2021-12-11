@@ -1,8 +1,9 @@
 ---
 title: Test
-date: 06/23/2021
+date: 2021-06-23
 publish: yes
 tags: uncategorized
+  test
 ...
 
 # why are you here??

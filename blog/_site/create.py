@@ -16,19 +16,28 @@ import markdown
 
 # markdown image extension
 class ImageTreeprocessor(markdown.treeprocessors.Treeprocessor):
-    def __init__(self, md, config):
-        self.md = md
-        super().__init__(md)
-        # other config options?
+    # def __init__(self, md, config):
+    #     self.md = md
+    #     super().__init__(md)
+    #     # other config options?
     def run(self, root):
-        for image in root.findall('.//img'):
-            self.md.Img.append(image.attrib['src'])
+        for x in root.iter():
+            if x.tag == "img":
+                self.md.Img.append(x.attrib['src'])
+            # else:
+            #     for child in x:
+            #         print(child.tag, child.text)
+            #         self.run(child)
 class ImageScraper(markdown.extensions.Extension):
     def extendMarkdown(self, md, md_globals):
         md.registerExtension(self)
         self.md = md
         #self.reset()
-        md.treeprocessors.add('img',ImageTreeprocessor(md,None),'_end')
+        # default priorities
+        # >>> md.treeprocessors._priority
+        # [PriorityItem(name='inline', priority=20), PriorityItem(name='prettify', priority=10)]
+        # smaller priority equates to getting ran last
+        md.treeprocessors.register(ImageTreeprocessor(md),'ImageTreeprocessor',1)
     def reset(self):
         #print('---called reset')
         self.md.Img = []
@@ -42,6 +51,7 @@ SITE = "_site"
 IMAGES = "_img"
 TEMPLATE_PAGE = os.path.join(SITE,"template-post.html")
 TEMPLATE_HOME = os.path.join(SITE,"template-home.html")
+TITLE = "{% TITLE %}"
 P_BODY = "{% BODY %}" # make regex?
 M_LIST = "{% LIST %}"
 M_TAG_LIST = "{% TAG_LIST %}"
@@ -81,25 +91,31 @@ for post in os.listdir(POSTS): # no guaranteed order
         # i hate python variables (the whole global scope thing)
         p = md.convert(f.read())
     #
-    if md.Meta.get("publish"):
+    if 'no' in md.Meta.get("publish"): # skip unpublished posts
         continue
-    # show metadata (todo, maybe make this collapsable?)
+    # show metadata (TODO, maybe make this collapsable?)
+    #print(md.Meta)
     p += "<hr>\n<pre><code class='txt'>METADATA\n--------\n"+"\n".join([x+": "+"|".join(md.Meta[x]) for x in md.Meta])+"\n</code></pre>"
     #
-    output = template.replace(P_BODY, p)
+    output = template.replace(TITLE, md.Meta.get("title")[0])
+    output = output.replace(P_BODY, p)
     with open(os.path.join(slug_dir,"index.html"),"w") as f:
         f.write(output)
     #
     # symlink image(s)
+    #print(md.Img)
     for image in md.Img:
         #print(os.path.join(slug_dir,image))
         # link is with respect to destination
+        # print(os.getcwd())
         os.symlink(os.path.join("..",IMAGES,image), os.path.join(slug_dir,image))
         # we'll see if this works
         #
         # gotta figure out how to follow symlinks for html
         # for now, just copy the image?
         #shutil.copy(os.path.join(IMAGES,image), os.path.join(slug_dir,image))
+        #
+        # yeah, TODO make nginx follow symlinks
     #
     # save data
     m.append([post,slug,md.Meta]) # list so we can sort later (post == key)

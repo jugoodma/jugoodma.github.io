@@ -1,6 +1,6 @@
 ---
 title: Why do I have an internal bias that NYC is cold as f**k?
-date: 06/23/2021
+date: 2022-01-15
 publish: no
 tags: new york
 ...

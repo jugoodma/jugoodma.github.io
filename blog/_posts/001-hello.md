@@ -1,6 +1,6 @@
 ---
 title: Hey
-date: 06/27/2021
+date: 2021-06-27
 publish: yes
 tags: uncategorized
 ...
