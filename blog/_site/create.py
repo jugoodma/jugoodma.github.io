@@ -13,6 +13,7 @@ import os
 import re
 import shutil
 import markdown
+from exif_delete import exif_delete
 
 # markdown image extension
 class ImageTreeprocessor(markdown.treeprocessors.Treeprocessor):
@@ -105,17 +106,21 @@ for post in os.listdir(POSTS): # no guaranteed order
     # symlink image(s)
     #print(md.Img)
     for image in md.Img:
+        # remote metadata from image
+        fn = os.path.join(IMAGES,image)
+        exif_delete(fn, fn) # overwrite
         #print(os.path.join(slug_dir,image))
         # link is with respect to destination
         # print(os.getcwd())
-        os.symlink(os.path.join("..",IMAGES,image), os.path.join(slug_dir,image))
+        os.symlink(os.path.join("..",fn), os.path.join(slug_dir,image))
         # we'll see if this works
         #
         # gotta figure out how to follow symlinks for html
         # for now, just copy the image?
-        #shutil.copy(os.path.join(IMAGES,image), os.path.join(slug_dir,image))
+        #shutil.copy(fn, os.path.join(slug_dir,image))
         #
         # yeah, TODO make nginx follow symlinks
+        # this is good?
     #
     # save data
     m.append([post,slug,md.Meta]) # list so we can sort later (post == key)

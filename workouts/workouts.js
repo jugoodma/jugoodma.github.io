@@ -81,4 +81,9 @@ var data = [
     link: "https://www.youtube.com/watch?v=cfetualiJqs",
     tags: ["home", "util"],
   },
+  {
+    workout: "home ~35-50min",
+    link: "https://www.youtube.com/watch?v=vc1E5CfRfos",
+    tags: ["home", "util", "strength"],
+  },
 ];
