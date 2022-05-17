@@ -6,10 +6,26 @@ body {
   margin-right: 4ch;
 }
 
-img,
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
 table {
   width: 100%;
   max-width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid;
+  padding: 2px;
+}
+
+pre {
+  overflow: scroll;
+  border: 1px solid;
+  padding: 2px;
 }
 
 @media only screen and (min-width: 850px) {
