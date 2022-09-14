@@ -3,13 +3,13 @@ from exif_delete import exif_delete
 
 fn = "IMG_4106.JPG"
 
-with open("./"+fn,"rb") as src:
+with open("../assets/"+fn,"rb") as src:
     img = Image(src)
     print(img.list_all())
 
 # see https://github.com/john-science/exif_delete/blob/master/exif_delete.py
 exif_delete(fn, fn) # overwrite
 
-with open("./"+fn,"rb") as src:
+with open("../assets/"+fn,"rb") as src:
     img = Image(src)
     print(img.list_all())

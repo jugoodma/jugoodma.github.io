@@ -8,12 +8,24 @@
 # update search index
 # update home index page
 
+import time
+start = time.time()
+
 # imports
-import os
-import re
-import shutil
-import markdown
+import os, re, shutil, markdown
 from exif_delete import exif_delete
+from argparse import ArgumentParser
+
+# https://stackoverflow.com/a/1009864
+parser = ArgumentParser()
+parser.add_argument(
+    "-v", "--verbose",
+    action="store_true", dest="verbose", default=False,
+    help="print status messages to stdout"
+)
+args = parser.parse_args()
+if args.verbose:
+    print("Running verbosely")
 
 # markdown image extension
 class ImageTreeprocessor(markdown.treeprocessors.Treeprocessor):
@@ -47,11 +59,12 @@ class ImageScraper(markdown.extensions.Extension):
 md = markdown.Markdown(extensions=['tables','fenced_code','meta',ImageScraper()])
 
 # variables
-POSTS = "_posts"
-SITE = "_site"
-IMAGES = "_img"
-TEMPLATE_PAGE = os.path.join(SITE,"template-post.html")
-TEMPLATE_HOME = os.path.join(SITE,"template-home.html")
+POSTS = "posts"
+SITE = "templates"
+IMAGES = "assets"
+OUTPUT = "../blog"
+TEMPLATE_PAGE = os.path.join(SITE,"post.html")
+TEMPLATE_HOME = os.path.join(SITE,"home.html")
 TITLE = "{% TITLE %}"
 P_BODY = "{% BODY %}" # make regex?
 M_LIST = "{% LIST %}"
@@ -66,24 +79,23 @@ M_TAG_LIST = "{% TAG_LIST %}"
 # - clean (remove) non-existant posts (maybe?)
 
 # assume this file is executed in the parent directory `/blog`
-assert os.path.basename(os.getcwd()) == "blog", "you're in the wrong directory!"
+assert os.path.basename(os.getcwd()) == "_blog", "you're in the wrong directory!"
 
-# assume any folder in `/blog`
-#   except ones that start with an underscore
-# is a post
-#
 # assume everything in POSTS is a post to be created
+if args.verbose:
+    print("Generating posts")
 prog = re.compile("\d*-(.+)\.md") # error on invalid format?
 with open(TEMPLATE_PAGE,"r") as f:
     template = f.read() # could move to top?
 m = [] # for later
 tags = {}
 for post in os.listdir(POSTS): # no guaranteed order
-    print(post)
+    if args.verbose:
+        print(post)
     # cmd flags, test for directory, del if need be, etc...
     #
     slug = prog.match(post).group(1) # make safer?
-    slug_dir = os.path.join(".",slug)
+    slug_dir = os.path.join(OUTPUT,slug)
     if os.path.exists(slug_dir):
         shutil.rmtree(slug_dir)
     os.makedirs(slug_dir)
@@ -95,7 +107,8 @@ for post in os.listdir(POSTS): # no guaranteed order
     if 'no' in md.Meta.get("publish"): # skip unpublished posts
         continue
     # show metadata (TODO, maybe make this collapsable?)
-    #print(md.Meta)
+    if args.verbose:
+        print(md.Meta)
     p += "<hr>\n<pre><code class='txt'>METADATA\n--------\n"+"\n".join([x+": "+"|".join(md.Meta[x]) for x in md.Meta])+"\n</code></pre>"
     #
     output = template.replace(TITLE, md.Meta.get("title")[0])
@@ -104,7 +117,8 @@ for post in os.listdir(POSTS): # no guaranteed order
         f.write(output)
     #
     # symlink image(s)
-    #print(md.Img)
+    if args.verbose:
+        print(md.Img)
     for image in md.Img:
         # remote metadata from image
         fn = os.path.join(IMAGES,image)
@@ -112,12 +126,12 @@ for post in os.listdir(POSTS): # no guaranteed order
         #print(os.path.join(slug_dir,image))
         # link is with respect to destination
         # print(os.getcwd())
-        os.symlink(os.path.join("..",fn), os.path.join(slug_dir,image))
+        #os.symlink(os.path.join("..",fn), os.path.join(slug_dir,image))
         # we'll see if this works
         #
         # gotta figure out how to follow symlinks for html
         # for now, just copy the image?
-        #shutil.copy(fn, os.path.join(slug_dir,image))
+        shutil.copy(fn, os.path.join(slug_dir,image))
         #
         # yeah, TODO make nginx follow symlinks
         # this is good?
@@ -137,9 +151,11 @@ for post in os.listdir(POSTS): # no guaranteed order
 
 # indexing
 # (update home for now)
+if args.verbose:
+    print("Writing home index.html")
 with open(TEMPLATE_HOME,"r") as f:
     template = f.read()
-with open("index.html","w") as f:
+with open(os.path.join(OUTPUT,"index.html"),"w") as f:
     m.sort(reverse=True)
     # tag delimiter == |
     m = ["<li data-tags='"+"|".join(x[2]['tags'])+"'><a href='"+x[1]+"/'>("+x[2]['date'][0]+") "+x[2]['title'][0]+"</a></li>" for x in m]
@@ -148,3 +164,14 @@ with open("index.html","w") as f:
     output = output.replace(M_TAG_LIST, "<ul class='list-inline' id='tag-list'>"+ "\n".join(tags) +"</ul>")
     f.write(output)
 #
+
+# copy over css/js
+if args.verbose:
+    print("Copying over css/js")
+for t in ["css", "js"]:
+    p = os.path.join(OUTPUT,f"_{t}")
+    if os.path.exists(p):
+        shutil.rmtree(p)
+    shutil.copytree(os.path.join(".",t), p)
+
+print("{:.3f} sec, {} posts".format(time.time() - start, len(m)))

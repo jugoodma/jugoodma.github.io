@@ -26,9 +26,19 @@ it sounded like anyone after the second wave got beaned with bicycle congestion 
 
 `2022-05-21`
 
+it went okay.
+the weather was good enough that morning.
+very wet.
+though, it got hotter as the day progressed.
+one runner actually died after crossing the finish line.
+
 ## NYRR -- Queens 10K
 
 `2022-06-18`
+
+it went well.
+not my fastest 10k, but not my slowest.
+the route was decent.
 
 ## NYRR -- New Balance Bronx 10 Mile
 
