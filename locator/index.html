@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <meta name="description" content="Locate yourself and others" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Justin Goodman" />
+
+  <!-- <link type="image/x-icon" rel="shortcut icon" href="favicon.png"/> -->
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet" />
+
+  <title>Locator</title>
+
+  <link href="../css/main.css" rel="stylesheet" />
+  <style>
+    body {
+      /* font-family: 'Raleway', sans-serif; */
+      /* font-family: 'IBM Plex Mono', monospace; */
+      font-family: "Space Mono", monospace;
+      margin-left: 4ch;
+      margin-right: 4ch;
+    }
+
+    .card {
+      max-width: max-content;
+      margin: 5px;
+    }
+
+    @media only screen and (min-width: 850px) {
+      /* desktop */
+      /* body {
+          width: 80ch;
+        } */
+    }
+  </style>
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+  </script>
+  <script
+    src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"
+    integrity="sha384-gR8pzIJ1b+DNklWrrcXEaidJIQ637f1IchZyr3SWkIElES9bomvMM8Io1NX9g2tO"
+    crossorigin="">
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Locate yourself and friends</h1>
+  </header>
+  <hr />
+  <section>
+    <h2>Info</h2>
+    <div id="room"></div>
+    <div id="map"></div>
+  </section>
+  <hr />
+  <footer>
+    <h3>Footer?</h3>
+    <p>Info?</p>
+  </footer>
+  <script>
+    // https://stackoverflow.com/a/1349426
+    function makeid(length) {
+      let result = '';
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const charactersLength = characters.length;
+      let counter = 0;
+      while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+      }
+      return result;
+    }
+
+    // set up the map
+    var map = L.map('map').setView([40.781329, -73.966671], 12); // [51.505, -0.09]
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    // var marker = L.marker([51.5, -0.09]).addTo(map);
+    // var circle = L.circle([51.508, -0.11], {
+    //     color: 'red',
+    //     fillColor: '#f03',
+    //     fillOpacity: 0.5,
+    //     radius: 500
+    // }).addTo(map);
+    // circle.bindPopup("I am a circle.");
+
+    // get query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryRoomCode = urlParams.get('room');
+    const roomDiv = document.getElementById("room");
+    if (queryRoomCode) {
+      // user wants to join this room
+      join(queryRoomCode, prompt("Password (leave blank if none)", ""));
+    } else {
+      // user either
+      // - wants to create a room
+      // - wants to manually enter the room code / pw
+      console.log("pre-room");
+      roomDiv.innerHTML = `
+        <label for="room-code">Room Code (leave blank if creating room): </label>
+        <input type="text" name="room-code" id="room-code">
+        <br>
+        <label for="password">Password (keep it secret): </label>
+        <input type="text" name="password" id="password">
+        <button onclick="start();">start</button>`;
+    }
+
+    function join(roomCode, password="") {
+      // start location tracking
+      if (!("geolocation" in navigator)) {
+        /* geolocation IS NOT available */
+        alert("geolocation unavailable");
+        return
+      }
+      let subToMarker = {};
+      /* geolocation is available */
+      // open server connection
+      const socket = new WebSocket(`wss://justgood.dev/locator/room/${roomCode}`);
+      socket.addEventListener("open", (event) => {
+        socket.send(`"ack:client"`);
+        // send location updates periodically
+        let prevRad = null;
+        let marker = null;
+        navigator.geolocation.watchPosition(
+          (position) => {
+            console.log("going to send", position);
+            // position.coords.latitude // decimal deg
+            // position.coords.longitude // decimal deg
+            // position.coords.accuracy // meters
+            let ll = [position.coords.latitude, position.coords.longitude];
+            L.circle(ll, { color: 'red', radius: 1 }).addTo(map);
+            if (marker === null) {
+              marker = L.marker(ll).addTo(map);
+            } else {
+              marker.setLatLng(ll);
+            }
+            if (prevRad === null) {
+              prevRad = L.circle(ll, { color: 'red', fillOpacity: 0.25, radius: position.coords.accuracy }).addTo(map);
+            } else {
+              prevRad.setLatLng(ll).setRadius(position.coords.accuracy);
+            }
+            // encrypt location with password and send to server
+            let data = JSON.stringify({
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+              acc: position.coords.accuracy,
+              // extras
+              // alt: position.coords.altitude,
+              // altAcc: position.coords.altitudeAccuracy,
+              // head: position.coords.heading,
+              // speed: position.coords.speed,
+            }, null, 0);
+            console.log("data before encryption --", data);
+            if (password !== "") {
+              data = CryptoJS.AES.encrypt(data, password).toString();
+            }
+            console.log("data after encryption --", data);
+            socket.send(data);
+          }, console.log, {}); // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+      });
+      socket.addEventListener("message", (event) => {
+        console.log(`Message from server -- "${event.data}"`);
+        let data = JSON.parse(event.data);
+        if (typeof data === "object" && data.hasOwnProperty('data')) {
+          // assume valid?
+          if (password !== "" && data.hasOwnProperty('from')) { // only decrypt packets with "from"
+            data.data = JSON.parse(CryptoJS.AES.decrypt(data.data, password).toString(CryptoJS.enc.Utf8));
+          }
+          console.log("decrypted packet --", data);
+          // read other location updates and update map
+          let ll = [data.data.lat, data.data.lon];
+          L.circle(ll, { color: 'gray', radius: 1 }).addTo(map);
+          if (subToMarker[data.from] === undefined) {
+            subToMarker[data.from] = [
+              L.marker(ll).addTo(map),
+              L.circle(ll, { color: 'gray', fillOpacity: 0.25, radius: data.data.acc }).addTo(map),
+            ];
+          }
+          let marker = subToMarker[data.from];
+          marker[0].setLatLng(ll);
+          marker[1].setLatLng(ll).setRadius(data.data.acc);
+        }
+      });
+    }
+
+    function start() {
+      const room = document.querySelector("#room-code");
+      const pw = document.querySelector("#password");
+      console.log(room.value, pw.value);
+      if (pw.value === "" && !confirm("No password entered -- data are sent via wss:// (WebSocket Secure), but without a password you'll be sending me unprotected data -- do you trust me?")) {
+        // location.reload(); // todo ?
+        return
+      }
+      if (room.value === "") {
+        // user created a room
+        room.value = makeid(8);
+      } // user manually entered the room code
+      join(room.value, pw.value);
+      roomDiv.innerHTML = `
+        <p style="display:inline-block;">Room code: <code>${room.value}</code></p>
+        <button style="display:inline-block;" onclick="copy();">share</button>
+        <p>Password: <code>${pw.value}</code></p>`;
+    }
+
+    function copy() {
+      if (!("clipboard" in navigator)) {
+        alert("unable to copy");
+        return
+      }
+      navigator.clipboard.writeText(window.location.href);
+      let s = document.createElement("span");
+      s.innerText = "copied.";
+      s.style.fontSize = "0.75rem";
+      document.getElementById("room").appendChild(s);
+      setTimeout(() => {
+        s.remove();
+      }, 2000);
+    }
+  </script>
+</body>
+
+</html>
