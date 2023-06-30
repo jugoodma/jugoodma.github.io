@@ -41,21 +41,14 @@
       height: 500px;
     }
   </style>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin="" />
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin="">
-  </script>
-  <script
-    src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"
-    integrity="sha384-gR8pzIJ1b+DNklWrrcXEaidJIQ637f1IchZyr3SWkIElES9bomvMM8Io1NX9g2tO"
-    crossorigin="">
-  </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+    </script>
+  <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"
+    integrity="sha384-gR8pzIJ1b+DNklWrrcXEaidJIQ637f1IchZyr3SWkIElES9bomvMM8Io1NX9g2tO" crossorigin="">
+    </script>
 </head>
 
 <body>
@@ -66,6 +59,15 @@
   <section>
     <h2>Info</h2>
     <div id="room"></div>
+    <hr />
+    <div>
+      <p>
+        Test for location services: <button id="locationTest">test</button>
+        <br />
+        (if you denied location access, refresh the page)
+      </p>
+    </div>
+    <hr />
     <div id="map"></div>
   </section>
   <hr />
@@ -106,14 +108,16 @@
     const urlParams = new URLSearchParams(window.location.search);
     const queryRoomCode = urlParams.get('room');
     const roomDiv = document.getElementById("room");
+
     if (queryRoomCode) {
-      // user wants to join this room
-      join(queryRoomCode, prompt("Password (leave blank if none)", ""));
+      // user wants to join this room -- ask for password and join room
+      let pw = prompt("Password (leave blank if none)", "");
+      join(queryRoomCode, pw);
+      showCode(queryRoomCode, pw);
     } else {
       // user either
       // - wants to create a room
       // - wants to manually enter the room code / pw
-      console.log("pre-room");
       roomDiv.innerHTML = `
         <label for="room-code">Room Code (leave blank if creating room): </label>
         <input type="text" name="room-code" id="room-code">
@@ -123,11 +127,9 @@
         <button onclick="start();">start</button>`;
     }
 
-    function join(roomCode, password="") {
+    function join(roomCode, password = "") {
       // start location tracking
-      if (!("geolocation" in navigator)) {
-        /* geolocation IS NOT available */
-        alert("geolocation unavailable");
+      if (!testLocation()) {
         return
       }
       let subToMarker = {};
@@ -141,7 +143,7 @@
         let marker = null;
         navigator.geolocation.watchPosition(
           (position) => {
-            console.log("going to send", position);
+            // console.log("going to send", position);
             // position.coords.latitude // decimal deg
             // position.coords.longitude // decimal deg
             // position.coords.accuracy // meters
@@ -168,23 +170,23 @@
               // head: position.coords.heading,
               // speed: position.coords.speed,
             }, null, 0);
-            console.log("data before encryption --", data);
+            // console.log("data before encryption --", data);
             if (password !== "") {
               data = CryptoJS.AES.encrypt(data, password).toString();
             }
-            console.log("data after encryption --", data);
+            // console.log("data after encryption --", data);
             socket.send(data);
           }, console.log, {}); // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
       });
       socket.addEventListener("message", (event) => {
-        console.log(`Message from server -- "${event.data}"`);
+        // console.log(`Message from server -- "${event.data}"`);
         let data = JSON.parse(event.data);
         if (typeof data === "object" && data.hasOwnProperty('data')) {
           // assume valid?
           if (password !== "" && data.hasOwnProperty('from')) { // only decrypt packets with "from"
             data.data = JSON.parse(CryptoJS.AES.decrypt(data.data, password).toString(CryptoJS.enc.Utf8));
           }
-          console.log("decrypted packet --", data);
+          // console.log("decrypted packet --", data);
           // read other location updates and update map
           let ll = [data.data.lat, data.data.lon];
           L.circle(ll, { color: 'gray', radius: 1 }).addTo(map);
@@ -212,12 +214,22 @@
       if (room.value === "") {
         // user created a room
         room.value = makeid(8);
-      } // user manually entered the room code
+      } // else user manually entered the room code
       join(room.value, pw.value);
+      showCode(room.value, pw.value);
+    }
+
+    function showCode(code, pw) {
+      if (!queryRoomCode) {
+        urlParams.append("room-code", code);
+      }
       roomDiv.innerHTML = `
-        <p style="display:inline-block;">Room code: <code>${room.value}</code></p>
-        <button style="display:inline-block;" onclick="copy();">share</button>
-        <p>Password: <code>${pw.value}</code></p>`;
+        <p style="display:inline-block;">
+          Room code: <code>${code}</code>
+          <button style="display:inline-block;" onclick="copy();">share</button>
+          <br/>
+          Password: <code>${pw}</code>
+        </p>`;
     }
 
     function copy() {
@@ -229,11 +241,41 @@
       let s = document.createElement("span");
       s.innerText = "copied.";
       s.style.fontSize = "0.75rem";
+      s.style.paddingLeft = "1em";
       document.getElementById("room").appendChild(s);
-      setTimeout(() => {
-        s.remove();
-      }, 2000);
+      setTimeout(() => { s.remove(); }, 2000);
     }
+
+    function testLocation(btn) {
+      if (!("geolocation" in navigator)) {
+        alert("geolocation is not supported in your browser -- you will be unable to see your location on the map and other people in the room will be unable to see your location");
+        return false
+      }
+      if (btn) {
+        btn.disabled = true;
+      }
+      // https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API/Using_the_Permissions_API -- maybe in the future?
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          if (btn) {
+            btn.disabled = false;
+          }
+          let ll = [pos.coords.latitude, pos.coords.longitude];
+          L.circle(ll, { color: 'green', radius: 3 }).addTo(map);
+          map.setView(ll, 13);
+        },
+        (err) => {
+          if (btn) {
+            btn.disabled = false;
+          }
+          alert("unable to get geolocation -- geolocation may not be supported in your browser, or you may not have location services active, or you may have denied location access");
+        },
+        {
+          timeout: 10000, // 10 sec
+        },
+      );
+    }
+    document.getElementById("locationTest").onclick = testLocation;
   </script>
 </body>
 

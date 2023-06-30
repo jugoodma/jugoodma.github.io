@@ -263,3 +263,61 @@ I just want to be done.
 - 2023-05-07
 - 2023-05-14
 - 2023-05-21
+
+
+## "Musicality" Rating
+
+2022-06-05 - cyberspacey, fast parts were good, cyberchasey, slow parts took from the rating; 6.8/10
+2022-06-12 - good speed, very groovy, i like it; 8.6/10
+2022-06-19 - ending is way too long; too repetitive, punk drums and beep-bop music don't mix that well; melody was okay; 5.1/10
+2022-06-26 - very relaxing; fit well with the YT vid; i liked it; 8.8/10
+2022-07-03 - ending could have been better; liked the flutey sounding thing; it sounded good; the time switch was a little weird; 7.8/10
+* 2022-07-10 - the most lofi-ey you've gotten; reminds me of YT video of two ghosts singing; it sounds fine; solid 8.0/10
+2022-07-17 - lowest effort song i've heard; there's no direction to it; 1/10
+2022-07-24 - walmart version of the original; "good enough copy of it"; i still like it 8.5/10
+2022-07-31 - "reminds me of pooping music"; build-up was way too long to get to the good part; bassline was sick 7.4/10
+2022-08-07 - 9/10 very good, i like it
+2022-08-14 - reminded of https://open.spotify.com/track/5karNcB62DxndWfrjfAEvO?si=b3f0233cfad349c7 ; yeah 7.8/10
+* 2022-08-21 - it felt really cool; all i was thinking about was sonic during the entire thing; little long in some parts; 8.7/10
+2022-08-28 - didn't like the museum sound in the background; liked the melody; solid 8.0/10
+2022-09-04 - "wet bathroom"; "poop music"; "oh, it's the cave music i wanted"; 7.8/10 it got me in the mining zone but i confused it with wet bathroom poop music; didn't get to the juicy bit until the end?
+2022-09-11 - it's realistic, could see it played at some european BDSM club; too freaking long, 8.5/10
+2022-09-18 - fine but kind-of forgettable; 7.5/10
+2022-09-25 - i like that one; 8.6/10
+2022-10-02
+2022-10-09
+2022-10-16
+2022-10-23
+2022-10-30
+2022-11-06
+2022-11-13
+2022-11-20
+2022-11-27
+2022-12-04
+2022-12-11
+2022-12-18
+2022-12-25
+
+2023-01-01
+2023-01-08
+2023-01-15
+2023-01-22
+2023-01-29
+2023-02-05
+2023-02-12
+2023-02-19
+2023-02-26
+2023-03-05
+2023-03-12
+2023-03-19
+2023-03-26
+2023-04-02
+2023-04-09
+2023-04-16
+2023-04-23
+2023-04-30
+2023-05-07
+2023-05-14
+2023-05-21
+2023-05-28
+
