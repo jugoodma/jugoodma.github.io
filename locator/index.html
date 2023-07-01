@@ -58,7 +58,7 @@
   <hr />
   <section>
     <h2>Info</h2>
-    <div id="room"></div>
+    <div id="info"></div>
     <hr />
     <div>
       <p>
@@ -107,20 +107,19 @@
     // get query params
     const urlParams = new URLSearchParams(window.location.search);
     const queryRoomCode = urlParams.get('room');
-    const roomDiv = document.getElementById("room");
+    const infoDiv = document.getElementById("info");
 
     if (queryRoomCode) {
       // user wants to join this room -- ask for password and join room
       let pw = prompt("Password (leave blank if none)", "");
       join(queryRoomCode, pw);
-      showCode(queryRoomCode, pw);
     } else {
       // user either
       // - wants to create a room
       // - wants to manually enter the room code / pw
-      roomDiv.innerHTML = `
-        <label for="room-code">Room Code (leave blank if creating room): </label>
-        <input type="text" name="room-code" id="room-code">
+      infoDiv.innerHTML = `
+        <label for="room">Room Code (leave blank if creating room): </label>
+        <input type="text" name="room" id="room">
         <br>
         <label for="password">Password (keep it secret): </label>
         <input type="text" name="password" id="password">
@@ -128,10 +127,14 @@
     }
 
     function join(roomCode, password = "") {
-      // start location tracking
-      if (!testLocation()) {
-        return
-      }
+      infoDiv.innerHTML = `
+        <p style="display:inline-block;">
+          Room code: <code>${roomCode}</code>
+          <button style="display:inline-block;" onclick="copy(this,'${roomCode}');">share</button>
+          <br/>
+          Password: <code>${password}</code>
+        </p>`;
+      //
       let subToMarker = {};
       /* geolocation is available */
       // open server connection
@@ -141,6 +144,12 @@
         // send location updates periodically
         let prevRad = null;
         let marker = null;
+        // we can still let the user see people in the room
+        // they just can't transmit/see their own location
+        if (!geolocationAvailable()) {
+          console.log("geo not available");
+          return
+        }
         navigator.geolocation.watchPosition(
           (position) => {
             // console.log("going to send", position);
@@ -204,9 +213,9 @@
     }
 
     function start() {
-      const room = document.querySelector("#room-code");
+      const room = document.querySelector("#room");
       const pw = document.querySelector("#password");
-      console.log(room.value, pw.value);
+      // console.log(room.value, pw.value);
       if (pw.value === "" && !confirm("No password entered -- data are sent via wss:// (WebSocket Secure), but without a password you'll be sending me unprotected data -- do you trust me?")) {
         // location.reload(); // todo ?
         return
@@ -216,40 +225,44 @@
         room.value = makeid(8);
       } // else user manually entered the room code
       join(room.value, pw.value);
-      showCode(room.value, pw.value);
     }
 
-    function showCode(code, pw) {
-      if (!queryRoomCode) {
-        urlParams.append("room-code", code);
-      }
-      roomDiv.innerHTML = `
-        <p style="display:inline-block;">
-          Room code: <code>${code}</code>
-          <button style="display:inline-block;" onclick="copy();">share</button>
-          <br/>
-          Password: <code>${pw}</code>
-        </p>`;
-    }
-
-    function copy() {
+    function copy(btn, code) {
       if (!("clipboard" in navigator)) {
         alert("unable to copy");
         return
       }
-      navigator.clipboard.writeText(window.location.href);
+      // this is definitely overkill
+      let url = window.location.href;
+      if (urlParams.size === 0) {
+        url += "?room=" + code;
+      } else if (!urlParams.get("room")) {
+        url += "&room=" + code;
+      } else if (urlParams.get("room") !== code) {
+        urlParams.set("room", code);
+        url = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+      }
+      navigator.clipboard.writeText(url);
       let s = document.createElement("span");
       s.innerText = "copied.";
       s.style.fontSize = "0.75rem";
       s.style.paddingLeft = "1em";
-      document.getElementById("room").appendChild(s);
+      if (btn.nextSibling) {
+        btn.parentNode.insertBefore(s, btn.nextSibling);
+      } else {
+        btn.parentNode.appendChild(s);
+      }
       setTimeout(() => { s.remove(); }, 2000);
     }
 
+    function geolocationAvailable() {
+      return "geolocation" in navigator;
+    }
+
     function testLocation(btn) {
-      if (!("geolocation" in navigator)) {
+      if (!geolocationAvailable()) {
         alert("geolocation is not supported in your browser -- you will be unable to see your location on the map and other people in the room will be unable to see your location");
-        return false
+        return
       }
       if (btn) {
         btn.disabled = true;
@@ -261,7 +274,7 @@
             btn.disabled = false;
           }
           let ll = [pos.coords.latitude, pos.coords.longitude];
-          L.circle(ll, { color: 'green', radius: 3 }).addTo(map);
+          L.circle(ll, { color: 'green', radius: pos.coords.accuracy }).addTo(map);
           map.setView(ll, 13);
         },
         (err) => {
