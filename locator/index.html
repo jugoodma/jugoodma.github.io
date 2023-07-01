@@ -185,7 +185,12 @@
             }
             // console.log("data after encryption --", data);
             socket.send(data);
-          }, console.log, {}); // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+          },
+          console.log,
+          {
+            maximumAge: 3000, // if we haven't gotten an update after 3sec, get a new pos
+          }
+        ); // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
       });
       socket.addEventListener("message", (event) => {
         // console.log(`Message from server -- "${event.data}"`);
