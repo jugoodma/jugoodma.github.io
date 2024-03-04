@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Corners" />
+  <meta name="keywords" content="Corners,game" />
+  <meta name="author" content="Justin Goodman, Cliff Bakalian" />
+  <meta charset="utf-8" />
+  <title>Corners</title>
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet" />
+  <style>
+    :root {
+      --player-one-color: #233142;
+      --player-two-color: #f95959;
+      /* --accent-color: #455d7a; */
+      --accent-color: #727577;
+      --background-color: #e3e3e3;
+    }
+
+    body {
+      font-family: "Space Mono", monospace;
+      background-color: var(--background-color);
+    }
+
+    #game {
+      display: flex;
+      min-height: 50%;
+    }
+
+    #game>.game-panel {
+      width: 100%;
+      padding: 8px;
+      margin: 0px 8px;
+    }
+
+    @media (min-width:768px) {
+      #game>.game-panel {
+        width: 50%;
+      }
+
+      #game>.game-panel:nth-child(1) {
+        width: 100%;
+      }
+    }
+
+    /* desktop breakpoint */
+    @media (min-width:1024px) {
+      #game>.game-panel {
+        width: 25%;
+      }
+
+      #game>.game-panel:nth-child(1) {
+        width: 50%;
+      }
+
+      #game>.game-panel:nth-child(2) {
+        order: -1;
+      }
+    }
+
+    .game-grid {
+      border: 2px solid var(--accent-color);
+      display: grid;
+      aspect-ratio: 1;
+      gap: 8px;
+      justify-items: stretch;
+      align-items: stretch;
+      border-radius: 8px;
+    }
+
+    .game-grid-size-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .game-grid-size-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .game-grid-size-7 {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .game-grid-size-9 {
+      grid-template-columns: repeat(9, 1fr);
+    }
+
+    .player-moves {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      justify-items: stretch;
+      align-items: stretch;
+    }
+
+    .move-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      justify-items: stretch;
+      align-items: stretch;
+    }
+
+    .piece {
+      background-color: var(--accent-color);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+    }
+
+    .piece-player-0 {
+      background-color: var(--player-one-color);
+    }
+
+    .piece-player-1 {
+      background-color: var(--player-two-color);
+    }
+
+    .piece-direction {
+      overflow: hidden;
+    }
+
+    .piece-direction-1 {
+      transform: rotate(0deg);
+    }
+
+    .piece-direction-2 {
+      transform: rotate(90deg);
+    }
+
+    .piece-direction-3 {
+      transform: rotate(180deg);
+    }
+
+    .piece-direction-4 {
+      transform: rotate(270deg);
+    }
+
+    .piece-highlight-0 {
+      background-color: var(--player-one-color);
+      filter: brightness(150%);
+      cursor: pointer;
+    }
+
+    .piece-highlight-1 {
+      background-color: var(--player-two-color);
+      filter: brightness(150%);
+      cursor: pointer;
+    }
+
+    .piece-staged-0 {
+      box-shadow: 0px 0px 32px 8px var(--player-one-color);
+      z-index: 1;
+      /* make sure shadow is above the grid pieces */
+    }
+
+    .piece-staged-1 {
+      box-shadow: 0px 0px 32px 8px var(--player-two-color);
+      z-index: 1;
+      /* make sure shadow is above the grid pieces */
+    }
+
+    .unavailable {
+      filter: brightness(40%);
+    }
+
+    .button {
+      padding: 8px;
+      margin-right: 8px;
+      color: var(--background-color);
+      background-color: var(--accent-color);
+      font-size: large;
+      font-weight: normal;
+      padding: 16px;
+      border: 1px solid black;
+      border-radius: 8px;
+    }
+
+    .button:hover {
+      filter: brightness(150%);
+      cursor: pointer;
+    }
+
+    .button:active {
+      filter: brightness(80%);
+    }
+
+    .button-0 {
+      background-color: var(--player-one-color);
+    }
+
+    .button-1 {
+      background-color: var(--player-two-color);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    dialog::backdrop {
+      /* background-image: linear-gradient(45deg,
+                    magenta,
+                    rebeccapurple,
+                    dodgerblue,
+                    green); */
+      background-color: var(--accent-color);
+      filter: brightness(25%);
+      opacity: 0.75;
+    }
+
+    dialog {
+      background-color: var(--background-color);
+      border: 2px solid var(--player-two-color);
+      border-radius: 4px;
+    }
+
+    /* https://www.w3schools.com/howto/howto_js_collapsible.asp */
+
+    .collapsible {
+      cursor: pointer;
+    }
+
+    .collapsible:after {
+      /* Unicode character for "plus" sign (+) */
+      content: '(\02795)';
+      font-size: 13px;
+      color: white;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .collapsible.active:after {
+      /* Unicode character for "minus" sign (-) */
+      content: "(\2796)";
+    }
+
+    .collapsible-content {
+      height: 0;
+      overflow: scroll;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      transition: height 0.2s ease-out;
+    }
+
+    .collapsible-content.active {
+      /* TODO mobile-friendly? */
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+        putting this <link> in <head> causes console warning on Firefox
+        "Layout was forced before the page was fully loaded. If stylesheets are not yet loaded this may cause a flash of unstyled content."
+        https://stackoverflow.com/questions/21147149/flash-of-unstyled-content-fouc-in-firefox-only-is-ff-slow-renderer
+        but putting it in <body> removes the warning -- strange
+
+        actually, just having it in the document causes the warning?
+    -->
+  <!-- <link href="https://esm.sh/preact" rel="modulepreload" /> -->
+  <article>
+    <header>
+      <h1>Corners</h1>
+      <p>A game by <a href="https://www.linkedin.com/in/clifford-bakalian" target="_blank">Cliff</a> and Justin</p>
+    </header>
+    <hr />
+    <div id="game">
+      <noscript>This page requires JavaScript to run.</noscript>
+    </div>
+    <hr />
+    <footer>Thank you for playing our game!</footer>
+  </article>
+  <script type="module">
+    /**
+     * @typedef {0 | 1 | 2} Player
+     * @typedef {0 | 1 | 2 | 3 | 4} Direction
+     * @typedef {3 | 5 | 7 | 9} BoardSizes
+     * 
+     * @typedef {Object} BoardCell
+     * @property {Direction} direction
+     * @property {Player?} player
+     * 
+     * @typedef {BoardCell[][]} Board
+     * 
+     * @typedef {Object} Position
+     * @property {number} row
+     * @property {number} col
+     * 
+     * @typedef {Object} Move
+     * @property {number} row
+     * @property {number} col
+     * @property {Direction} direction
+     * @property {Player} player
+     * 
+     * @typedef {boolean} GameStates
+     * 
+     * @typedef {"1v1" | "cpu" | "puzzle"} GameModes
+     * we could look into 3-player / n-player mode
+     * 
+     * @typedef {Map<Player, boolean[]} PlayerPieces
+     * 
+     * @typedef {string} HashPosition
+     * @typedef {Map<HashPosition, Set<Direction>>} ValidNextMoves
+     * 
+     * @typedef {Object} Game
+     * @property {GameStates} state
+     * @property {GameModes} mode
+     * @property {Board} board
+     * @property {Player} currentPlayer
+     * @property {PlayerPieces} playerPieces
+     * @property {Move[]} moveHistory
+     * @property {ValidNextMoves} validNextMoves
+     * @property {Move?} stagedMove
+     * @property {string} info
+     */
+
+    import {
+      h as PreactH,
+      Fragment as PreactFragment,
+      render as PreactRender,
+    } from 'https://esm.sh/preact';
+    import {
+      useState as PreactUseState,
+      useReducer as PreactUseReducer,
+    } from 'https://esm.sh/preact/hooks';
+    // (attempt to) provide types for preact functions
+    /**
+     * @typedef {null | string | Object} PreactNode
+     */
+    /**
+     * @template {Object} [T=null]
+     * @param {string | function(T):PreactNode} type
+     * @param {T} props
+     * @param {PreactNode[]} children
+     * @returns {PreactNode}
+     */
+    function h(type, props, ...children) {
+      return PreactH(type, props, children);
+    }
+    /**
+     * @param {...any} props 
+     * @returns {PreactNode}
+     */
+    function Fragment(...props) {
+      return PreactFragment(...props);
+    }
+    /**
+     * @param {PreactNode} node
+     * @param {HTMLElement} element
+     * @returns {void}
+     */
+    function render(node, element) {
+      return PreactRender(node, element);
+    }
+    /**
+     * @template {unknown} S
+     * @param {S | function():S} initialState
+     * @returns {[S, function(S | function(S):S):void]}
+     */
+    function useState(initialState) {
+      return PreactUseState(initialState);
+    }
+    /**
+     * @template {unknown} S,A
+     * @param {function(S,A):S} reducer
+     * @param {S | function():S} initialState
+     * @returns {[S, function(A):void]}
+     */
+    function useReducer(reducer, initialState) {
+      return PreactUseReducer(reducer, initialState);
+    }
+
+
+    // game
+
+    const CORNERS = [' ', '┌', '┐', '┘', '└',]; // 0, 1, 2, 3, 4
+    const INCREMENTERS = /** @type {Record<Direction, Position>} */({
+      1: { row: 1, col: 1 },
+      2: { row: 1, col: -1 },
+      3: { row: -1, col: -1 },
+      4: { row: -1, col: 1 },
+    });
+
+    /**
+     * @type {function({mode: GameModes, info:string, playerPieces: PlayerPieces, moveHistory:Move[]}): PreactNode}
+     */
+    const LeftPanel = (props) => {
+      return (
+        h('section', { class: 'game-panel' },
+          h('h2', null, 'Info'),
+          h('p', null, `You are playing ${props.mode} mode.`),
+          h('p', null, props.info),
+          h('br'),
+          h('h2', null, 'Moves'),
+          h('div', { class: 'player-moves' },
+            h('div', { class: 'move-grid' },
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[1] ? '' : ' unavailable'}`, direction: 1 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[2] ? '' : ' unavailable'}`, direction: 2 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[4] ? '' : ' unavailable'}`, direction: 4 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[3] ? '' : ' unavailable'}`, direction: 3 }),
+            ),
+            h('div', { class: 'move-grid' },
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[1] ? '' : ' unavailable'}`, direction: 1 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[2] ? '' : ' unavailable'}`, direction: 2 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[4] ? '' : ' unavailable'}`, direction: 4 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[3] ? '' : ' unavailable'}`, direction: 3 }),
+            )
+          ),
+          h('br'),
+          h('h2', null, 'Move History'),
+          props.moveHistory ?
+            h('ol', null, props.moveHistory.map((move, idx) =>
+              h('li', { key: idx },
+                h('pre', null,
+                  `p${move.player + 1}: <${move.row},${move.col},${CORNERS[move.direction]}>`,
+                )
+              )
+            ))
+            : null,
+        )
+      );
+    };
+    const Rules = (props) => {
+      const [shown, setShown] = useState(false);
+      return (
+        h(Fragment, null,
+          h('h2', { class: `collapsible${shown ? ' active' : ''}`, onClick: () => setShown(s => !s) }, 'Rules'),
+          h('ol', { class: `collapsible-content${shown ? ' active' : ''}` },
+            h('li', null, 'Players alternate taking turns placing corner pieces on the board.'),
+            h('li', null,
+              'The game works in four-turn cycles for each player (eight turns total for a two-person game).' +
+              'During a four-turn cycle, a player places each of the four corner pieces exactly once.' +
+              'At the end of a cycle, the player\'s set of corner pieces reset, and can be played again.',
+              h('ul', null,
+                h('li', null,
+                  'For example, if player 1 starts and places their top-left corner piece, they cannot place that piece again until they have placed their three other corner pieces.' +
+                  'After they have placed their four moves, they can place all four corner pieces again on their next turn.' +
+                  'The next time player 1 could place their top-left corner piece is after there are eight pieces on the board.'
+                )
+              ),
+              'Within a cycle, a player is free to place their corner pieces in whatever order they see fit.'
+            ),
+            h('li', null,
+              'Valid moves consist of',
+              h('ol', null,
+                h('li', null, 'The first move must be placed in the center of the board.'),
+                h('li', null, 'The next player can move in the cells pointed to from the current move.'),
+                h('li', null, 'You cannot place the opposite corner piece in a corner cell.')
+              )
+            ),
+            h('li', null, 'The winner is the player who "corners" their opponent -- ie, puts their opponent in a state with no valid moves.')
+          )
+        )
+      );
+    };
+    /**
+     * @type {function({player:Player, submitMove:function():void, newGame:function():void}): PreactNode}
+     */
+    const RightPanel = (props) => {
+      return (
+        h('section', { class: 'game-panel' },
+          h('h2', null, 'Controls'),
+          h('div', { class: 'button-container' },
+            h('button', { class: `button button-${props.player}`, onClick: props.submitMove }, 'Submit Move'),
+            h('button', { class: `button`, onClick: props.newGame }, 'New Game'),
+          ),
+          h('br'),
+          h(Rules)
+        )
+      );
+    };
+    /**
+     * @type {function({direction:number}): PreactNode}
+     */
+    const PieceSVG = (props) => {
+      if (props.direction === 0) return h(Fragment);
+      return (
+        h('svg', { class: `${props.class ? props.class + ' ' : ''}piece-direction piece-direction-${props.direction}`, viewBox: '0 0 32 32', xmlns: 'http://www.w3.org/2000/svg' },
+          h('line', { 'stroke-width': 2, x1: 10, x2: 10, y1: 10, y2: 24, stroke: '#fff' }),
+          h('line', { 'stroke-width': 2, x1: 10, x2: 24, y1: 10, y2: 10, stroke: '#fff' }),
+        )
+      );
+    };
+    /**
+     * @type {function({direction:number, player:number|null, isPossibleMove:number|null, isStagedMove:boolean, updatePiece:function():void}): PreactNode}
+     */
+    const Piece = (props) => {
+      const classes = ['piece'];
+      let display = null;
+      if (props.player !== null) {
+        classes.push(`piece-player-${props.player}`);
+      }
+      if (props.isPossibleMove !== null) {
+        classes.push(`piece-highlight-${props.isPossibleMove}`);
+      }
+      if (props.isStagedMove) {
+        classes.push(`piece-staged-${props.isPossibleMove}`);
+      }
+      return (
+        h('div', { class: classes.join(" "), onClick: props.updatePiece },
+          h(PieceSVG, { direction: props.direction }, null)
+        )
+      );
+    };
+    /**
+     * @type {function({board:Board, nextMoves:ValidNextMoves, stagedMove?:Move, currentPlayer:Player, nextPosition:function(Position):void}): PreactNode}
+     */
+    const Grid = (props) => {
+      return (
+        h('section', { class: `game-panel game-grid game-grid-size-${props.board.length}` }, props.board.flatMap((row, idx) =>
+          row.map((col, jdx) =>
+            h(
+              Piece,
+              {
+                ...col,
+                isPossibleMove: props.nextMoves.get(hashPosition({ row: idx, col: jdx })) ? props.currentPlayer : null,
+                isStagedMove: props.stagedMove && hashPosition(props.stagedMove) === hashPosition({ row: idx, col: jdx }),
+                updatePiece: () => props.nextPosition({ row: idx, col: jdx, }),
+              }
+            )
+          )
+        ))
+      );
+    };
+    /**
+     * @type {function(Position): HashPosition}
+     */
+    const hashPosition = (position) => {
+      return `${position.row},${position.col}`;
+    };
+    /**
+     * @type {function(): boolean[]}
+     */
+    const freshPlayerPiecesArray = () => {
+      return [true, true, true, true, true];
+    };
+    /**
+     * @type {function(BoardSizes, Player): ValidNextMoves}
+     */
+    const getInitialFirstMoves = (size, player) => {
+      const directions = /** @type {Set<Direction>} */(new Set());
+      for (let i = 1; i < CORNERS.length; i++) {
+        directions.add(i);
+      }
+      const midpoint = Math.floor(size / 2);
+      const moves = /** @type {ValidNextMoves} */(new Map());
+      moves.set(hashPosition({ row: midpoint, col: midpoint }), directions);
+      return moves;
+    };
+    /**
+     * @type {function(Move?, ValidNextMoves): boolean}
+     */
+    const checkMove = (move, validMoves) => {
+      if (!move) return true;
+      const isMove = validMoves.get(hashPosition({ row: move.row, col: move.col }));
+      return isMove && isMove.has(move.direction);
+    };
+    /**
+     * @type {function(number, Move): boolean}
+     */
+    const moveIsValidIfInCorner = (boardSize, move) => {
+      // const CORNERS = [' ', '┌', '┐', '┘', '└',]; // 0, 1, 2, 3, 4
+      if (move.row === 0) { // top
+        // left
+        if (move.col === 0) return move.direction !== 3;
+        // right
+        if (move.col === boardSize - 1) return move.direction !== 4;
+      }
+      if (move.row === boardSize - 1) { // bottom
+        // left
+        if (move.col === 0) return move.direction !== 2;
+        // right
+        if (move.col === boardSize - 1) return move.direction !== 1;
+      }
+      return true;
+    };
+    /**
+     * @type {function(Player): string}
+     */
+    const playerTurnMessage = (player) => {
+      return `It is player ${player + 1}'s turn.`;
+    };
+    /**
+     * @type {function({size:BoardSizes, mode:GameModes}): Game}
+     */
+    const newGame = (props) => {
+      const board = /** @type {BoardCell[][]} */([]);
+      for (let i = 0; i < props.size; i++) {
+        const row = /** @type {BoardCell[]} */([]);
+        for (let j = 0; j < props.size; j++) {
+          row.push({ direction: 0, player: null });
+        }
+        board.push(row);
+      }
+      // const numPlayers = { "1v1": 2, "1v1v1": 3, "cpu": 2, "puzzle": 2 }[props.mode];
+      const playerPieces = /** @type {PlayerPieces} */(new Map());
+      playerPieces.set(0, freshPlayerPiecesArray());
+      playerPieces.set(1, freshPlayerPiecesArray());
+      const startingPlayer = 0;  // player 0 always starts (for now)
+      return {
+        state: true,
+        mode: props.mode,
+        board: board,
+        currentPlayer: startingPlayer,
+        playerPieces: playerPieces,
+        moveHistory: [],
+        validNextMoves: getInitialFirstMoves(props.size, startingPlayer),
+        stagedMove: null,
+        info: playerTurnMessage(startingPlayer),
+      };
+    };
+    /**
+     * @typedef {Object} NewGame
+     * @property {"newGame"} type
+     * @property {BoardSizes} size
+     * @property {GameModes} mode
+     * 
+     * @typedef {Object} ShowNextMove
+     * @property {"showNextMove"} type
+     * @property {Position} cell
+     * 
+     * @typedef {Object} CommitMove
+     * @property {"commitMove"} type
+     *  
+     * @typedef {NewGame | ShowNextMove | CommitMove} GameDispatchAction
+     */
+    /**
+     * @type {function(Game, GameDispatchAction): Game}
+     */
+    const gameReducer = (_game, update) => {
+      if (!_game.state && update.type !== 'newGame') return _game;
+      switch (update.type) {
+        case 'newGame':
+          return newGame(update);
+        case 'showNextMove':
+          // validate the attempted move
+          // show it on the board and save as staged
+          //
+          if ( // is player staging a move with different position?
+            _game.stagedMove &&
+            (
+              _game.stagedMove.row !== update.cell.row ||
+              _game.stagedMove.col !== update.cell.col
+            )
+          ) {
+            // reset staged move
+            _game.board[_game.stagedMove.row][_game.stagedMove.col].direction = 0;
+            _game.stagedMove = null;
+          }
+          if (!_game.validNextMoves.get(hashPosition(update.cell))) {
+            return { ..._game };
+          }
+          // calculate next direction based on
+          // - player's available directions
+          // - cell's current direction
+          let i = 1, nextDirection = 0;
+          do {
+            nextDirection = (_game.board[update.cell.row][update.cell.col].direction + i++) % CORNERS.length;
+          } while (
+            !_game.playerPieces.get(_game.currentPlayer)[nextDirection] ||
+            !moveIsValidIfInCorner(_game.board.length, { ...update.cell, direction: nextDirection })
+          );
+          // create the staged move
+          const nextMove = nextDirection === 0 ? null : /** @type {Move} */({
+            row: update.cell.row,
+            col: update.cell.col,
+            direction: nextDirection,
+            player: _game.currentPlayer,
+          });
+          _game.stagedMove = nextMove;
+          _game.board[update.cell.row][update.cell.col].direction = nextDirection;
+          return {
+            ..._game,
+            info: playerTurnMessage(_game.currentPlayer),
+          };
+        case 'commitMove':
+          // commit staged move to the board
+          // set up for next move
+          //
+          if (!_game.stagedMove) {
+            return {
+              ..._game,
+              info: 'You must place a move on the board',
+            };
+          }
+          _game.board[_game.stagedMove.row][_game.stagedMove.col].direction = _game.stagedMove.direction;
+          _game.board[_game.stagedMove.row][_game.stagedMove.col].player = _game.stagedMove.player;
+          _game.playerPieces.get(_game.currentPlayer)[_game.stagedMove.direction] = false;
+          if (_game.playerPieces.get(_game.currentPlayer).filter(b => b).length === 1) {
+            // reset the player's available pieces
+            _game.playerPieces.set(_game.currentPlayer, freshPlayerPiecesArray());
+          }
+          _game.moveHistory.push(_game.stagedMove);
+          _game.currentPlayer = (_game.currentPlayer + 1) % 2;
+          // generate next set of valid moves
+          _game.validNextMoves.clear();
+          const nextPositions = /** @type {Position[]} */([]);
+          for (let row = _game.stagedMove.row; 0 <= row && row < _game.board.length; row += INCREMENTERS[_game.stagedMove.direction].row) {
+            nextPositions.push({ row: row, col: _game.stagedMove.col });
+          }
+          for (let col = _game.stagedMove.col; 0 <= col && col < _game.board[_game.stagedMove.row].length; col += INCREMENTERS[_game.stagedMove.direction].col) {
+            nextPositions.push({ row: _game.stagedMove.row, col: col });
+          }
+          for (let i = 0; i < nextPositions.length; i++) {
+            const position = nextPositions[i];
+            if (_game.board[position.row][position.col].player === null) { // is cell empty?
+              const directions = /** @type {Set<Direction>} */(new Set());
+              for (let d = 1; d <= CORNERS.length; d++) {
+                if (
+                  _game.playerPieces.get(_game.currentPlayer)[d] &&
+                  moveIsValidIfInCorner(_game.board.length, { ...position, direction: d })
+                ) {
+                  directions.add(d);
+                }
+              }
+              if (directions.size > 0) {
+                _game.validNextMoves.set(hashPosition(position), directions);
+              }
+            }
+          }
+          if (_game.validNextMoves.size === 0) { // does player have any valid moves?
+            return {
+              ..._game,
+              state: false,
+              // currentPlayer is set to the next player -- so prevPlayer won
+              info: `Player ${((_game.currentPlayer + 1) % 2) + 1} has won`,
+            };
+          }
+          _game.stagedMove = null;
+          return {
+            ..._game,
+            info: playerTurnMessage(_game.currentPlayer),
+          }
+        default:
+          console.warn(update.type);
+      }
+      return _game;
+    };
+    /**
+     * @type {function(): PreactNode}
+     */
+    const Game = () => {
+      const [game, gameDispatch] = useReducer(gameReducer, () => newGame({ mode: '1v1', size: 5 }));
+      return (
+        h(Fragment, null,
+          h(Grid, {
+            board: game.board,
+            nextMoves: game.validNextMoves,
+            stagedMove: game.stagedMove,
+            currentPlayer: game.currentPlayer,
+            nextPosition: cell => gameDispatch({
+              type: "showNextMove",
+              cell: cell,
+            }),
+          }),
+          h(LeftPanel, {
+            mode: game.mode,
+            info: game.info,
+            playerPieces: game.playerPieces,
+            moveHistory: game.moveHistory,
+          }),
+          h(RightPanel, {
+            player: game.currentPlayer,
+            submitMove: () => gameDispatch({ type: "commitMove" }),
+            newGame: () => {
+                            /** @type {HTMLDialogElement} */(document.getElementById('new-game-modal')).showModal();
+            },
+          }),
+          h('dialog', {
+            id: 'new-game-modal',
+            onClose: (ev) => {
+              if (ev.target.returnValue !== 'start') return;
+              const form = document.forms.namedItem('new-game-form');
+              const mode = /** @type {HTMLSelectElement} */(form.elements.namedItem('mode')).value;
+              const size = /** @type {HTMLSelectElement} */(form.elements.namedItem('size')).value;
+              console.log(form, mode, size);
+              gameDispatch({
+                type: 'newGame',
+                mode: mode,
+                size: size,
+              });
+            }
+          },
+            h('h1', null, 'New Game'),
+            game.state ? h('p', null, 'This will stop the current game!') : null,
+            h('form', { id: 'new-game-form', method: 'dialog' },
+              // game mode
+              // board size
+              h('label', { for: 'new-game-form-game-mode' }, 'Game mode: '),
+              h('select', { id: 'new-game-form-game-mode', name: 'mode' },
+                h('option', { value: /** @type {GameModes} */('1v1'), selected: true }, 'Standard two-player'),
+                h('option', { value: /** @type {GameModes} */('cpu'), disabled: true }, 'Solo vs Computer (not implemented)'),
+                h('option', { value: /** @type {GameModes} */('puzzle'), disabled: true }, 'Puzzle (not implemented)')
+              ),
+              h('br'),
+              h('label', { for: 'new-game-form-board-size' }, 'Board size: '),
+              h('select', { id: 'new-game-form-board-size', name: 'size' },
+                h('option', { value: /** @type {BoardSizes} */(3) }, '3x3'),
+                h('option', { value: /** @type {BoardSizes} */(5), selected: true }, '5x5'),
+                h('option', { value: /** @type {BoardSizes} */(7) }, '7x7'),
+                h('option', { value: /** @type {BoardSizes} */(9) }, '9x9')
+              ),
+              h('br'),
+              h('br'),
+              h('div', { class: 'button-container' },
+                h('button', { class: 'button button-1', value: 'start' }, 'Start'),
+                h('button', { class: 'button button-0', value: 'close' }, 'Close (', h('pre', { style: { display: 'inline' } }, 'Esc'), ')')
+              )
+            ),
+          )
+        )
+      );
+    };
+    render(h(Game), document.getElementById('game'));
+  </script>
+</body>
+
+</html>
