@@ -31,12 +31,10 @@ Each song is labeled by the date I started the project -- every Sunday for 52 co
 
 ## Cold, Hard, Statistics
 
-
-
 ## Q & A
 
 1. Why did you do this project?
-   1. 
+   1.
 1. What were you hoping to gain?
 1. What was the original impetus/motivation?
 1. Would you consider the project a success or failure, and why?
@@ -61,50 +59,50 @@ Rating scale
 <!-- https://tapedeckpodcast.com/the-spectreview-color-rating-system/ -->
 
 - `rating`
-   - subjective enjoyability
-      - did you like the song?
-   - scale: 0-6
-      - 0 means you hate the song
-      - 1-5
-      - 6 means you love the song
-   - weight: 25%
+  - subjective enjoyability
+    - did you like the song?
+  - scale: 0-6
+    - 0 means you hate the song
+    - 1-5
+    - 6 means you love the song
+  - weight: 25%
 - `production`
-   - production quality
-      - how good was the production?
-      - how is the sound quality?
-   - scale: 0 to 6
-       - 0 means the song is unsaveable
-       - 1 means there was at least one interesting idea or good feeling
-       - 2-4
-       - 5 means the song needs minor tweaks to be "good"
-       - 6 means the song is release-ready
-   - weight: 25%
+  - production quality
+    - how good was the production?
+    - how is the sound quality?
+  - scale: 0 to 6
+    - 0 means the song is unsaveable
+    - 1 means there was at least one interesting idea or good feeling
+    - 2-4
+    - 5 means the song needs minor tweaks to be "good"
+    - 6 means the song is release-ready
+  - weight: 25%
 - `technical`
-   - technical ability
-      - how technically challenging was the production?
-      - how challenging does the production _feel_ from listening?
-   - scale: 0-6
-      - 0 means the song sounds/was easy/trivial-to-make
-      - 1-5
-      - 6 means the song was one of the hardest songs I've ever had to make
-   - weight: 20%
+  - technical ability
+    - how technically challenging was the production?
+    - how challenging does the production _feel_ from listening?
+  - scale: 0-6
+    - 0 means the song sounds/was easy/trivial-to-make
+    - 1-5
+    - 6 means the song was one of the hardest songs I've ever had to make
+  - weight: 20%
 - `originality`
-   - originality and uniqueness
-      - how original is the song?
-      - did you do anything new/unique?
-   - scale: 0-6
-   - weight: 15%
+  - originality and uniqueness
+    - how original is the song?
+    - did you do anything new/unique?
+  - scale: 0-6
+  - weight: 15%
 - `poetic`
-   - poetic component
-      - lyrics -- how "good" are the lyrics? how poetic?
-      - melody -- how "good" is the main melody?
-   - scale: 0-6
-   - weight: 10%
+  - poetic component
+    - lyrics -- how "good" are the lyrics? how poetic?
+    - melody -- how "good" is the main melody?
+  - scale: 0-6
+  - weight: 10%
 - `replay`
-   - replay-ability
-      - how much "replay-ability" does the song have?
-   - scale: 0-6
-   - weight: 5%
+  - replay-ability
+    - how much "replay-ability" does the song have?
+  - scale: 0-6
+  - weight: 5%
 
 ### Glitch era
 
@@ -264,60 +262,71 @@ I just want to be done.
 - 2023-05-14
 - 2023-05-21
 
-
 ## "Musicality" Rating
 
-2022-06-05 - cyberspacey, fast parts were good, cyberchasey, slow parts took from the rating; 6.8/10
-2022-06-12 - good speed, very groovy, i like it; 8.6/10
-2022-06-19 - ending is way too long; too repetitive, punk drums and beep-bop music don't mix that well; melody was okay; 5.1/10
-2022-06-26 - very relaxing; fit well with the YT vid; i liked it; 8.8/10
-2022-07-03 - ending could have been better; liked the flutey sounding thing; it sounded good; the time switch was a little weird; 7.8/10
-* 2022-07-10 - the most lofi-ey you've gotten; reminds me of YT video of two ghosts singing; it sounds fine; solid 8.0/10
-2022-07-17 - lowest effort song i've heard; there's no direction to it; 1/10
-2022-07-24 - walmart version of the original; "good enough copy of it"; i still like it 8.5/10
-2022-07-31 - "reminds me of pooping music"; build-up was way too long to get to the good part; bassline was sick 7.4/10
-2022-08-07 - 9/10 very good, i like it
-2022-08-14 - reminded of https://open.spotify.com/track/5karNcB62DxndWfrjfAEvO?si=b3f0233cfad349c7 ; yeah 7.8/10
-* 2022-08-21 - it felt really cool; all i was thinking about was sonic during the entire thing; little long in some parts; 8.7/10
-2022-08-28 - didn't like the museum sound in the background; liked the melody; solid 8.0/10
-2022-09-04 - "wet bathroom"; "poop music"; "oh, it's the cave music i wanted"; 7.8/10 it got me in the mining zone but i confused it with wet bathroom poop music; didn't get to the juicy bit until the end?
-2022-09-11 - it's realistic, could see it played at some european BDSM club; too freaking long, 8.5/10
-2022-09-18 - fine but kind-of forgettable; 7.5/10
-2022-09-25 - i like that one; 8.6/10
-2022-10-02
-2022-10-09
-2022-10-16
-2022-10-23
-2022-10-30
-2022-11-06
-2022-11-13
-2022-11-20
-2022-11-27
-2022-12-04
-2022-12-11
-2022-12-18
-2022-12-25
+(high)
 
-2023-01-01
-2023-01-08
-2023-01-15
-2023-01-22
-2023-01-29
-2023-02-05
-2023-02-12
-2023-02-19
-2023-02-26
-2023-03-05
-2023-03-12
-2023-03-19
-2023-03-26
-2023-04-02
-2023-04-09
-2023-04-16
-2023-04-23
-2023-04-30
-2023-05-07
-2023-05-14
-2023-05-21
-2023-05-28
+- 2022-06-05 - cyberspacey, fast parts were good, cyberchasey, slow parts took from the rating; 6.8/10
+- 2022-06-12 - good speed, very groovy, i like it; 8.6/10
+- 2022-06-19 - ending is way too long; too repetitive, punk drums and beep-bop music don't mix that well; melody was okay; 5.1/10
+- 2022-06-26 - very relaxing; fit well with the YT vid; i liked it; 8.8/10
+- 2022-07-03 - ending could have been better; liked the flutey sounding thing; it sounded good; the time switch was a little weird; 7.8/10
+- - 2022-07-10 - the most lofi-ey you've gotten; reminds me of YT video of two ghosts singing; it sounds fine; solid 8.0/10
+- 2022-07-17 - lowest effort song i've heard; there's no direction to it; 1/10
+- 2022-07-24 - walmart version of the original; "good enough copy of it"; i still like it 8.5/10
+- 2022-07-31 - "reminds me of pooping music"; build-up was way too long to get to the good part; bassline was sick 7.4/10
+- 2022-08-07 - 9/10 very good, i like it
+- 2022-08-14 - reminded of https://open.spotify.com/track/5karNcB62DxndWfrjfAEvO?si=b3f0233cfad349c7 ; yeah 7.8/10
+- - 2022-08-21 - it felt really cool; all i was thinking about was sonic during the entire thing; little long in some parts; 8.7/10
+- 2022-08-28 - didn't like the museum sound in the background; liked the melody; solid 8.0/10
+- 2022-09-04 - "wet bathroom"; "poop music"; "oh, it's the cave music i wanted"; 7.8/10 it got me in the mining zone but i confused it with wet bathroom poop music; didn't get to the juicy bit until the end?
+- 2022-09-11 - it's realistic, could see it played at some european BDSM club; too freaking long, 8.5/10
+- 2022-09-18 - fine but kind-of forgettable; 7.5/10
+- 2022-09-25 - i like that one; 8.6/10
 
+(not high)
+
+- 2022-10-02 - drum is too strong, but fish kept me entertained; 7.1/10
+- 2022-10-09 - music video so good, no turbo snails L; music is good; 9.3/10
+- 2022-10-16 - makes good concentrating background music; drop left me hanging; weird chord in the middle; 7.6/10
+- 2022-10-23 - it was okay; the video audio was muffled; rain sounds were nice; 7.1/10
+- 2022-10-30 - honest to god traumatizing to listen to; backing track is nice, gives pharmaceutical ad vibes; can't listen to lyrics without busting; 5/10
+- 2022-11-06 - it's giving slide whistle vibes; weep wop; it's an enjoyable listen, like the fast pace; 7.8/10
+- 2022-11-13 - it's a pretty long song; good nap music; like the flute, bouncy flute is always a good move; 7.8/10
+- 2022-11-20 - this one is good; i like the dissonance in this one; it's jazzy; could've gone without the thanksgiving sermon, prefer just the music; it's giving la la land closing credit vibes; 8.5/10
+- 2022-11-27 - i like this one; pretty solid; good listen; 8.2/10
+
+(not high)
+
+- 2022-12-04 - ending was mid; cockroach music, scurring towards the water source; i'm feelin it; good jam; better than the last one; 8.4/10
+- 2022-12-11 - kind of tedious; original is too good; individual parts in the beginning are disjointed, don't mesh together; 6.8/10
+- 2022-12-18 - "pretty solid - oh it's not done"; i like the keyboard? (main instrument); it's funky; you can really shake to this song; 8.1/10
+- 2022-12-25 - the lyrics are giving Drake, but worse; backing track was okay; lyrics are cliche; voice needs to be stronger, it sounds like you're running out of air; 6.4/10
+  2023-01-01 - sounds like 2022-11-27 but happier (similar note pattern?); pretty good; nothing wrong with it; smooth; 8/10
+  2023-01-08 - this is a better copy than your other remake; 8.6
+  2023-01-15 - it's giving "toto - africa"; the moan sounded like a meme lmao; it was a bop; slowing it down gives it a tinny quality; 8.4/10
+  2023-01-22 - i don't like this one; the pluck feels off time, and is distracting; rest of the song components are okay; frantic cockroach vibe; 7.1/10
+  2023-01-29 - this is one of my favorites; it is one of the most cohesive you've made; exercise song, catchy, has kermit in the video; 9.5/10
+  2023-02-05 - "the build-up to nothing song"; it's too long; i kind-of like the ending bit; it sounds like the intro to a TV show; cbat influence; 7.1/10
+  2023-02-12 - it was really generic; i have nothing to say; idk 7.4/10
+  2023-02-19 - got the vibes right; "dramatic"; nothing going for it; "it's funny, 'penis' was said a number of times"; 6.9/10
+  2023-02-26 - "this is a thrustable song. i can imagine this gets played in some sex dungeon in germany"; it's so long; 9/10
+  2023-03-05 - sounds like wii mii music; the ending was clean; "yeah, it can be played in an elevator"; fit for the genre, good execution; 8.4/10
+  2023-03-12 - i feel like little justin would be proud of you; song kinda sucked tho; 7/10
+  2023-03-19 - it feels like a half-song; song cuts off at a weird part; 6.9/10
+  2023-03-26 - sounds like "mad world"; the comments are right, this beat is gas; off-beat farts don't hit as hard as the on-beat farts; very good 8.6/10
+  2023-04-02 - it's ok; the moan was out of place; your tag is funny; 7.4/10
+  2023-04-09 - it was ok; like the little piano embellishments; not too memorable; 7.6/10
+  2023-04-16 - bossa-nova-y; more elevator-music than the last elevator-music song; like the vintage quality; flute is good; 8.5/10
+  2023-04-23 - it was cool you made all the sounds yourself; sounds like soccer-stadium music; "big room house"; "cool as fuck"; 8.1/10
+  2023-04-30 - it's a very atmospheric song; sounds like a movie score; 9.3/10
+  2023-05-07 - i like the bass; good job following the inspiration; groovy; 8.6/10
+  2023-05-14 - spacy; it was ok; less memorable; 7.6/10
+  2023-05-21 - it's good; upbeat cousin of the lofi jargon nap song (2022-06-26); seems like exercise music but with AC in the background; "interesting choice" but it works; 8.4/10
+  2023-05-28 - i've been begging you to make hyperpop for a long time and you delivered; crunchy; lyrics stand out; circumcision line is quite the winner; 8.6/10
+
+Some old song ratings
+
+2014-03-10 - good idea, no idea where to go with it; way too repetitive; boring; 4.8/10
+2016-05-30 - there's some variation; drop is better; too repetitive; could be played at a club; 5/10
+2022-03-31 - 9.5/10

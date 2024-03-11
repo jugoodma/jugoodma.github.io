@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
   <head>
@@ -37,7 +37,12 @@
     <title>Risk of Airborne Illnesses</title>
   </head>
 
-  <body style="font-family: 'Quicksand', sans-serif; background-color: #ede1d1">
+  <body
+    style="
+      font-family: &quot;Quicksand&quot;, sans-serif;
+      background-color: #ede1d1;
+    "
+  >
     <header>
       <div class="main" style="margin-top: 100px">
         <h1 style="text-align: center">Risk of Airborne Illnesses</h1>
@@ -115,13 +120,13 @@
         var weather = httpGet(
           "https://api.wunderground.com/api/99303080b7a46c90/conditions/q/" +
             postalCode +
-            ".json"
+            ".json",
         );
         //var AQ = httpGet("https://www.airnowapi.org/aq/forecast/zipCode/?zipCode=" + postalCode + "&format=application/json&API_KEY=BD8E4D0F-1773-4B0F-AACC-3A39B2A7819F");
         var state = httpGet(
           "https://maps.googleapis.com/maps/api/geocode/json?address=" +
             postalCode +
-            "&key=AIzaSyAe4pqY96_TwGm-j9iqf3vlAC9IwUYDc2Y"
+            "&key=AIzaSyAe4pqY96_TwGm-j9iqf3vlAC9IwUYDc2Y",
         );
         var zip = httpGet("states.json");
         obj1 = JSON.parse(weather);

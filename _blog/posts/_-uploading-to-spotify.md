@@ -9,19 +9,23 @@ tags: uncategorized
 # How I Uploaded My Song to Spotify
 
 UPC <https://en.wikipedia.org/wiki/Universal_Product_Code> -- <https://my.gs1us.org/product/1024/gs1-company-prefix>
+
 - only need one UPC per "release" (single, ep, lp, album) <https://artists.singlemusic.com/hc/en-us/articles/360059838794-Why-Are-UPC-and-ISRC-Required-In-Order-for-My-Sales-to-Report-> <https://hypeddit.com/news/upc-vs-isrc-which-one-gets-you-best-results-for-spotify-pre-saves/>
 - we can get a single UPC for $30 (probably won't have my company as the company prefix, but i'll still be identified)
 
 ISRC <https://usisrc.org/about/obtaining_code.html>
+
 - one per track
 
 Copyright
+
 - <https://yonamariemusic.com/yona/blog/37/does-distrokid-copyright-your-music>
 - <https://www.copyright.gov/circs/circ34.pdf>
 - <https://copyright.gov/gram/> -- Sound Recordings from an Album.
 - <https://www.copyright.gov/about/fees.html>
 
 LLC <https://howtostartanllc.com/new-york-llc/cost-to-form>
+
 - free EIN from the IRS
 - lots of paperwork
 - time/effort
