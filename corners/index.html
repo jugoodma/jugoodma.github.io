@@ -27,42 +27,41 @@
 
       #game {
         display: flex;
-        min-height: 50%;
+        flex-flow: row wrap;
+        width: 100%;
       }
 
-      #game > .game-panel {
-        width: 100%;
+      .left-panel {
+        flex-grow: 1;
+      }
+
+      .right-panel {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        align-content: flex-start;
+      }
+
+      @media (min-width: 1024px) {
+        .left-panel {
+          width: 60%;
+        }
+
+        .right-panel {
+          width: 40%;
+        }
+      }
+
+      .game-panel {
         padding: 8px;
         margin: 0px 8px;
       }
 
-      @media (min-width: 768px) {
-        #game > .game-panel {
-          width: 50%;
-        }
-
-        #game > .game-panel:nth-child(1) {
-          width: 100%;
-        }
-      }
-
-      /* desktop breakpoint */
-      @media (min-width: 1024px) {
-        #game > .game-panel {
-          width: 25%;
-        }
-
-        #game > .game-panel:nth-child(1) {
-          width: 50%;
-        }
-
-        #game > .game-panel:nth-child(2) {
-          order: -1;
-        }
-      }
-
       .game-grid {
         border: 2px solid var(--accent-color);
+        max-height: 80vh;
+        padding: 8px;
+        margin: auto;
         display: grid;
         aspect-ratio: 1;
         gap: 8px;
@@ -418,83 +417,6 @@
         4: { row: -1, col: 1 },
       });
 
-      /**
-       * @type {function({mode: GameModes, info:string, playerPieces: PlayerPieces, moveHistory:Move[]}): PreactNode}
-       */
-      const LeftPanel = (props) => {
-        return h(
-          "section",
-          { class: "game-panel" },
-          h("h2", null, "Info"),
-          h("p", null, `You are playing ${props.mode} mode.`),
-          h("p", null, props.info),
-          h("br"),
-          h("h2", null, "Moves"),
-          h(
-            "div",
-            { class: "player-moves" },
-            h(
-              "div",
-              { class: "move-grid" },
-              h(PieceSVG, {
-                class: `piece-player-0${props.playerPieces.get(0)[1] ? "" : " unavailable"}`,
-                direction: 1,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-0${props.playerPieces.get(0)[2] ? "" : " unavailable"}`,
-                direction: 2,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-0${props.playerPieces.get(0)[4] ? "" : " unavailable"}`,
-                direction: 4,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-0${props.playerPieces.get(0)[3] ? "" : " unavailable"}`,
-                direction: 3,
-              }),
-            ),
-            h(
-              "div",
-              { class: "move-grid" },
-              h(PieceSVG, {
-                class: `piece-player-1${props.playerPieces.get(1)[1] ? "" : " unavailable"}`,
-                direction: 1,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-1${props.playerPieces.get(1)[2] ? "" : " unavailable"}`,
-                direction: 2,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-1${props.playerPieces.get(1)[4] ? "" : " unavailable"}`,
-                direction: 4,
-              }),
-              h(PieceSVG, {
-                class: `piece-player-1${props.playerPieces.get(1)[3] ? "" : " unavailable"}`,
-                direction: 3,
-              }),
-            ),
-          ),
-          h("br"),
-          h("h2", null, "Move History"),
-          props.moveHistory
-            ? h(
-                "ol",
-                null,
-                props.moveHistory.map((move, idx) =>
-                  h(
-                    "li",
-                    { key: idx },
-                    h(
-                      "pre",
-                      null,
-                      `p${move.player + 1}: <${move.row},${move.col},${CORNERS[move.direction]}>`,
-                    ),
-                  ),
-                ),
-              )
-            : null,
-        );
-      };
       const Rules = (props) => {
         const [shown, setShown] = useState(false);
         return h(
@@ -568,9 +490,9 @@
         );
       };
       /**
-       * @type {function({player:Player, submitMove:function():void, newGame:function():void}): PreactNode}
+       * @type {function({mode: GameModes, info:string, playerPieces: PlayerPieces, moveHistory:Move[], player:Player, submitMove:function():void, newGame:function():void}): PreactNode}
        */
-      const RightPanel = (props) => {
+      const GamePanel = (props) => {
         return h(
           "section",
           { class: "game-panel" },
@@ -592,6 +514,35 @@
               "New Game",
             ),
           ),
+          h('h2', null, 'Moves'),
+          h('div', { class: 'player-moves' },
+            h('div', { class: 'move-grid' },
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[1] ? '' : ' unavailable'}`, direction: 1 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[2] ? '' : ' unavailable'}`, direction: 2 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[4] ? '' : ' unavailable'}`, direction: 4 }),
+              h(PieceSVG, { class: `piece-player-0${props.playerPieces.get(0)[3] ? '' : ' unavailable'}`, direction: 3 }),
+            ),
+            h('div', { class: 'move-grid' },
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[1] ? '' : ' unavailable'}`, direction: 1 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[2] ? '' : ' unavailable'}`, direction: 2 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[4] ? '' : ' unavailable'}`, direction: 4 }),
+              h(PieceSVG, { class: `piece-player-1${props.playerPieces.get(1)[3] ? '' : ' unavailable'}`, direction: 3 }),
+            )
+          ),
+          h('h2', null, 'Info'),
+          h('p', null, `You are playing ${props.mode} mode.`),
+          h('p', null, props.info),
+          h('br'),
+          h('h2', null, 'Move History'),
+          props.moveHistory ?
+            h('ol', null, props.moveHistory.map((move, idx) =>
+              h('li', { key: idx },
+                h('pre', null,
+                  `p${move.player + 1}: <${move.row},${move.col},${CORNERS[move.direction]}>`,
+                )
+              )
+            ))
+            : null,
           h("br"),
           h(Rules),
         );
@@ -938,32 +889,34 @@
         return h(
           Fragment,
           null,
-          h(Grid, {
-            board: game.board,
-            nextMoves: game.validNextMoves,
-            stagedMove: game.stagedMove,
-            currentPlayer: game.currentPlayer,
-            nextPosition: (cell) =>
-              gameDispatch({
-                type: "showNextMove",
-                cell: cell,
-              }),
-          }),
-          h(LeftPanel, {
-            mode: game.mode,
-            info: game.info,
-            playerPieces: game.playerPieces,
-            moveHistory: game.moveHistory,
-          }),
-          h(RightPanel, {
-            player: game.currentPlayer,
-            submitMove: () => gameDispatch({ type: "commitMove" }),
-            newGame: () => {
-              /** @type {HTMLDialogElement} */ (
-                document.getElementById("new-game-modal")
-              ).showModal();
-            },
-          }),
+          h('div', { class: 'left-panel' }, 
+            h(Grid, {
+              board: game.board,
+              nextMoves: game.validNextMoves,
+              stagedMove: game.stagedMove,
+              currentPlayer: game.currentPlayer,
+              nextPosition: (cell) =>
+                gameDispatch({
+                  type: "showNextMove",
+                  cell: cell,
+                }),
+            }),
+          ),
+          h('div', { class: 'right-panel' }, 
+            h(GamePanel, {
+              mode: game.mode,
+              info: game.info,
+              playerPieces: game.playerPieces,
+              moveHistory: game.moveHistory,
+              player: game.currentPlayer,
+              submitMove: () => gameDispatch({ type: "commitMove" }),
+              newGame: () => {
+                /** @type {HTMLDialogElement} */ (
+                  document.getElementById("new-game-modal")
+                ).showModal();
+              },
+            }),
+          ),
           h(
             "dialog",
             {
