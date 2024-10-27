@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# sudo apt install jq
+# https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
+
 # npm install -g npx
 
 # ./gpx.sh file.gpx
